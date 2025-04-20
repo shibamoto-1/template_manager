@@ -1,7 +1,7 @@
-export default function Body() {
+export default function Body({ body }) {
   return (
-    <div className="border h-2/3 p-5 m-5">
-      
+    <div className="border p-5 m-5">
+      <p>{body}</p>
     </div>
   )
 }
