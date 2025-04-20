@@ -16,6 +16,9 @@ class TemplatesController < ApplicationController
   end
 
   def destroy
+    template = Template.find(params[:id])
+    template.destroy
+    head :ok
   end
 
   private

@@ -28,6 +28,12 @@ export default function Template() {
     });
     fetch();
   }
+  
+  const deleteItem = async(id) => {
+    if (!window.confirm(`本当に削除しますか？`)) return;
+    await axios.delete(`http://localhost:3010/templates/${id}`)
+    fetch();
+  }
 
   const selectItem = (title) => {
     const matchContent =  templates.find((template) => template.title === title);
@@ -44,7 +50,7 @@ export default function Template() {
         <h1>ホームページです！</h1>
       </div>
       <Form createItem={createItem} />
-      <SelectItem templates={templates} selectItem={selectItem} />
+      <SelectItem templates={templates} selectItem={selectItem} deleteItem={deleteItem} />
       <div className="container mx-auto px-4 py-6">
         <Body item={selectedItem} editBody={editBody} />
       </div>
