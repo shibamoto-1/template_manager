@@ -1,13 +1,12 @@
-import SelectItem from "../components/SelectItem"
-import Body from "../components/Body"
 import { useEffect, useState } from "react";
 import axios from 'axios';
+import SelectItem from "../components/SelectItem"
+import Body from "../components/Body"
+import Form from "../components/Form";
 
 export default function Template() {
   const [ templates, setTemplates ] = useState([]);
-  const [ body, setBody ] = useState("");
-  const [ bodyValue, setBodyValue ] = useState("");
-  const [ titleValue, setTitleValue ] = useState("");
+  const [ body, setBody ] = useState("アイテムを選択してください");
 
   const fetch = async() => {
     const res = await axios.get("http://localhost:3010/templates")
@@ -19,6 +18,13 @@ export default function Template() {
       title: title,
       body: body,
       genre_id: genre
+    });
+    fetch();
+  }
+
+  const editBody = async(body, id) => {
+    await axios.patch(`http://localhost:3010/template/${id}`, {
+      body: body
     });
     fetch();
   }
@@ -37,21 +43,10 @@ export default function Template() {
       <div className="text-center my-5">
         <h1>ホームページです！</h1>
       </div>
-      <div className="text-center">
-        <h2>作成エリア</h2>
-        <div>
-          <label htmlFor="title">タイトル</label>
-          <input type="text" id="title" className="input" value={titleValue} onChange={e => setTitleValue(e.target.value)} />
-        </div>
-        <div>
-          <label htmlFor="body">内容</label>
-          <input type="text" id="body" className="input" value={bodyValue} onChange={e => setBodyValue(e.target.value)} />
-        </div>
-        <button className="btn btn-secondary" onClick={() => createItem(titleValue, bodyValue)}>作成</button>
-      </div>
-      <div className="flex justify-around">
-        <SelectItem templates={templates} selectItem={selectItem} />
-        <Body body={body} />
+      <Form createItem={createItem} />
+      <SelectItem templates={templates} selectItem={selectItem} />
+      <div className="container mx-auto px-4 py-6">
+        <Body body={body} setBody={setBody} />
       </div>
     </div>
   )
