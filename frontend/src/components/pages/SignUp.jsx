@@ -30,47 +30,49 @@ export const SignUp = () => {
     }
   };
   return (
-    <>
-      <h1>サインアップページです</h1>
-      <form>
-        <div>
-          <label htmlFor="email">メールアドレス</label>
-          <input
+    <div className="w-full h-screen">
+      <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-md border p-5 mt-20 mx-auto">
+        <legend className="fieldset-legend">Sign up</legend>
+
+        <label className="label" htmlFor="email">Email</label>
+        <input
             type="email"
             id="email"
             name="email"
+            placeholder="Email"
             className="input"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-        </div>
-        <div>
-          <label htmlFor="password">パスワード</label>
-          <input
+
+        <label className="label" htmlFor="password">Password</label>
+        <input
             type="password"
             id="password"
             name="password"
+            placeholder="Password"
             className="input"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-        </div>
-        <div>
-          <label htmlFor="password_confirmation">パスワード確認</label>
-          <input
-            type="password"
-            id="password_confirmation"
-            name="password_confirmation"
-            className="input"
-            value={passwordConfirmation}
-            onChange={(e) => setPasswordConfirmation(e.target.value)}
-          />
-        </div>
-        <button type="submit" className="btn btn-secondary" onClick={(e) => handleSignUpSubmit(e)}>
-          Submit
+        
+        <label className="label" htmlFor="password_confirmation">Password confirm</label>
+        <input
+          type="password"
+          id="password_confirmation"
+          name="password_confirmation"
+          placeholder="Password confirm"
+          className="input"
+          value={passwordConfirmation}
+          onChange={(e) => setPasswordConfirmation(e.target.value)}
+        />
+
+        <button type="submit" className="btn btn-primary mt-4" onClick={(e) => handleSignUpSubmit(e)}>
+          アカウント作成
         </button>
-      </form>
-      <Link to="/signin">サインインへ</Link>
-    </>
+
+        <Link to="/signin">サインインへ</Link>
+      </fieldset>
+    </div>
   );
 };
