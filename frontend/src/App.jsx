@@ -33,7 +33,7 @@ function App() {
 
   useEffect(() => {
     handleGetCurrentUser();
-  }, [setCurrentUser]);
+  }, []);
 
   const Private = ({ children }) => {
     if (!loading) {

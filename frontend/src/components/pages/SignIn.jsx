@@ -49,6 +49,7 @@ export const SignIn = () => {
             type="email"
             id="email"
             name="email"
+            autoComplete="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -60,6 +61,7 @@ export const SignIn = () => {
             id="password"
             name="password"
             value={password}
+            autoComplete="current-password"
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>

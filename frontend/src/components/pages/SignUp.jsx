@@ -1,12 +1,8 @@
-import Cookies from "js-cookie";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { signUp } from "../../api/auth";
-import { AuthContext } from "../../App";
 
 export const SignUp = () => {
-  const { setIsSignedIn, setCurrentUser } = useContext(AuthContext);
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
@@ -31,12 +27,6 @@ export const SignUp = () => {
       alert("confirm email");
     } catch (e) {
       console.log("Error response:", e.response); 
-      if (e.response && e.response.data && e.response.data.error) {
-        console.log("エラー:", e.response.data.error);
-        alert("エラー: " + e.response.data.error.join(", "));
-      } else {
-        alert("サインアップに失敗しました。再度お試しください。");
-      }
     }
   };
   return (
