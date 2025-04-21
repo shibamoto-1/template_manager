@@ -40,36 +40,40 @@ export const SignIn = () => {
     }
   };
   return (
-    <>
-      <p>サインインページです</p>
-      <form>
-        <div>
-          <label htmlFor="email">メールアドレス</label>
-          <input
+    <div className="w-full h-screen">
+      <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-md border p-5 mt-20 mx-auto">
+        <legend className="fieldset-legend">Sign up</legend>
+
+        <label className="label" htmlFor="email">Email</label>
+        <input
             type="email"
             id="email"
             name="email"
-            autoComplete="email"
+            placeholder="Email"
+            className="input"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-        </div>
-        <div>
-          <label htmlFor="password">パスワード</label>
-          <input
+
+        <label className="label" htmlFor="password">Password</label>
+        <input
             type="password"
             id="password"
             name="password"
+            placeholder="Password"
+            className="input"
             value={password}
-            autoComplete="current-password"
             onChange={(e) => setPassword(e.target.value)}
           />
-        </div>
-        <button type="submit" onClick={(e) => handleSignInSubmit(e)}>
-          Submit
+        
+
+        <button type="submit" className="btn btn-primary mt-4" onClick={(e) => handleSignInSubmit(e)}>
+          ログイン
         </button>
-      </form>
-      <Link to="/signup">サインアップへ</Link>
-    </>
+
+        <Link to="/signup">サインアップへ</Link>
+
+      </fieldset>
+    </div>
   );
 };
