@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
-import SelectItem from "../components/SelectItem"
-import Body from "../components/Body"
-import Form from "../components/Form";
+import SelectItem from "../SelectItem"
+import Body from "../Body"
+import Form from "../Form";
+import Header from "../Header";
 
 export default function Template() {
   const [ templates, setTemplates ] = useState([]);
@@ -46,6 +47,7 @@ export default function Template() {
 
   return (
     <div className="w-full h-full">
+      <Header />
       <div className="text-center my-5">
         <h1>ホームページです！</h1>
       </div>
