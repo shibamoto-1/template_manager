@@ -48,9 +48,6 @@ export default function Template() {
   return (
     <div className="w-full h-full">
       <Header />
-      <div className="text-center my-5">
-        <h1>ホームページです！</h1>
-      </div>
       <Form createItem={createItem} />
       <SelectItem templates={templates} selectItem={selectItem} deleteItem={deleteItem} />
       <div className="container mx-auto px-4 py-6">
