@@ -3,6 +3,7 @@ import { createContext, useState, useEffect } from 'react';
 import { getCurrentUser } from "./api/auth";
 import { SignUp } from './components/pages/SignUp';
 import { SignIn } from './components/pages/SignIn';
+import Test from './components/pages/Test';
 import Template from './components/pages/Template';
 
 import './App.css'
@@ -60,6 +61,7 @@ function App() {
     >
       <BrowserRouter>
         <Routes>
+          <Route path="/test" element={<Test />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signin" element={<SignIn />} />
           <Route
