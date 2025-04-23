@@ -16,13 +16,13 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
 
   const handleGetCurrentUser = async () => {
-
     try {
       const res = await getCurrentUser();
 
       if (res?.data.isLogin === true) {
         setIsSignedIn(true);
         setCurrentUser(res?.data.data);
+        console.log(res);
       } else {
         console.log("no current user");
       }

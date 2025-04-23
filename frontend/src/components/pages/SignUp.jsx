@@ -1,11 +1,13 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signUp } from "../../api/auth";
 
 export const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
+
+  const navigate = useNavigate();
 
   const generateParams = () => {
     const signUpParams = {
@@ -24,7 +26,8 @@ export const SignUp = () => {
     try {
       const res = await signUp(params);
       console.log(res);
-      alert("confirm email");
+      alert("登録しました");
+      navigate("/signin");
     } catch (e) {
       console.log("Error response:", e.response); 
     }
