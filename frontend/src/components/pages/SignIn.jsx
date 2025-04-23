@@ -42,7 +42,7 @@ export const SignIn = () => {
   return (
     <div className="w-full h-screen">
       <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-md border p-5 mt-20 mx-auto">
-        <legend className="fieldset-legend">Sign up</legend>
+        <legend className="fieldset-legend">Sign In</legend>
 
         <label className="label" htmlFor="email">Email</label>
         <input

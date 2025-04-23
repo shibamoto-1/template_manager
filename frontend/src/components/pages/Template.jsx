@@ -4,6 +4,7 @@ import SelectItem from "../SelectItem"
 import Body from "../Body"
 import Form from "../Form";
 import Header from "../Header";
+import Cookies from "js-cookie";
 
 export default function Template() {
   const [ templates, setTemplates ] = useState([]);

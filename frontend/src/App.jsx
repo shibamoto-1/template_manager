@@ -13,22 +13,23 @@ export const AuthContext = createContext();
 function App() {
   const [loading, setLoading] = useState(true);
   const [isSignedIn, setIsSignedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useState({});
 
   const handleGetCurrentUser = async () => {
+    console.log(`カレント: ${currentUser}`)
     try {
       const res = await getCurrentUser();
 
       if (res?.data.isLogin === true) {
         setIsSignedIn(true);
         setCurrentUser(res?.data.data);
-        console.log(res?.data.data);
       } else {
         console.log("no current user");
       }
     } catch (e) {
       console.log(e);
     }
+
     setLoading(false);
   };
 
