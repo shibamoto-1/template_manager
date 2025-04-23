@@ -16,7 +16,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
 
   const handleGetCurrentUser = async () => {
-    console.log(`カレント: ${currentUser}`)
+
     try {
       const res = await getCurrentUser();
 
