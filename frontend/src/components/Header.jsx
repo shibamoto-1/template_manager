@@ -1,3 +1,4 @@
+import Logo from "../assets/logo.svg";
 import { useContext } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { AuthContext } from "../App"
@@ -20,9 +21,9 @@ export default function Header() {
   }
 
   return(
-    <header className="bg-gray-200 p-4 flex justify-between items-center">
-      <h1 className="text-xl font-bold">
-        <Link to="/">My App</Link>
+    <header className="p-4 flex justify-between items-center border-b border-gray-200">
+      <h1 className="">
+        <img src={Logo} />
       </h1>
 
       {isSignedIn ? (

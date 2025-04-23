@@ -10,20 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_04_20_235559) do
-  create_table "genres", force: :cascade do |t|
+ActiveRecord::Schema[7.2].define(version: 2025_04_23_123851) do
+  create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_categories_on_user_id"
   end
 
   create_table "templates", force: :cascade do |t|
     t.string "title", null: false
     t.text "body", null: false
-    t.integer "genre_id", null: false
+    t.integer "category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["genre_id"], name: "index_templates_on_genre_id"
+    t.integer "user_id", null: false
+    t.index ["category_id"], name: "index_templates_on_category_id"
+    t.index ["user_id"], name: "index_templates_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -49,5 +53,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_20_235559) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
-  add_foreign_key "templates", "genres"
+  add_foreign_key "categories", "users"
+  add_foreign_key "templates", "categories"
+  add_foreign_key "templates", "users"
 end

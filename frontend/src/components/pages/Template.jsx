@@ -4,22 +4,41 @@ import SelectItem from "../SelectItem"
 import Body from "../Body"
 import Form from "../Form";
 import Header from "../Header";
+import Cookies from "js-cookie";
 
 export default function Template() {
   const [ templates, setTemplates ] = useState([]);
   const [ selectedItem, setSelectedItem ] = useState({body: "アイテムを選択してください"});
 
   const fetch = async() => {
-    const res = await axios.get("http://localhost:3010/templates")
+    const res = await axios.get("http://localhost:3010/templates", {
+      headers: {
+        "access-token": Cookies.get("_access_token"),
+        client: Cookies.get("_client"),
+        uid: Cookies.get("_uid"),
+      },
+    });
     setTemplates(res.data);
   }
 
+
   const createItem = async(title, body, genre=1) => {
-    await axios.post("http://localhost:3010/templates", {
+    await axios.post("http://localhost:3010/templates",
+    {
+      template: {
       title: title,
       body: body,
-      genre_id: genre
-    });
+      category_id: genre
+      }
+    },
+    {
+      headers: {
+        "access-token": Cookies.get("_access_token"),
+        client: Cookies.get("_client"),
+        uid: Cookies.get("_uid"),
+      }
+    }
+    );
     fetch();
   }
 
@@ -32,7 +51,15 @@ export default function Template() {
   
   const deleteItem = async(id) => {
     if (!window.confirm(`本当に削除しますか？`)) return;
-    await axios.delete(`http://localhost:3010/templates/${id}`)
+    await axios.delete(`http://localhost:3010/templates/${id}`,
+    {
+      headers: {
+        "access-token": Cookies.get("_access_token"),
+        client: Cookies.get("_client"),
+        uid: Cookies.get("_uid"),
+      }
+    }
+    );
     fetch();
   }
 
@@ -56,3 +83,4 @@ export default function Template() {
     </div>
   )
 }
+
