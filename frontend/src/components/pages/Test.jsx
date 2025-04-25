@@ -37,10 +37,19 @@ export default function Test() {
     fetch();
   }
 
-  const editBody = async(body, id) => {
+  const updateTemplate = async(body, title, id) => {
     await axios.patch(`http://localhost:3010/templates/${id}`, {
+      title: title,
       body: body
-    });
+    },
+    {
+      headers: {
+        "access-token": Cookies.get("_access_token"),
+        client: Cookies.get("_client"),
+        uid: Cookies.get("_uid"),
+      }
+    }
+);
     fetch();
   }
   
@@ -55,7 +64,7 @@ export default function Test() {
   }, [])
 
   return (
-    <TemplateContext.Provider value={{ templates, selectItem, selectedItem }}>
+    <TemplateContext.Provider value={{ templates, selectItem, selectedItem, updateTemplate }}>
       <div className="flex h-screen">
         <Sidebar />
         <div className="flex-1" >

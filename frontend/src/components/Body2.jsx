@@ -1,18 +1,7 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import { TemplateContext } from "./pages/Test";
 
-export default function Body2() {
-  const { selectedItem } = useContext(TemplateContext);
-  const [ input, setInput ] = useState("");
-  const [ body, setBody ] = useState("");
-
-  useEffect(() => {
-    if(selectedItem){
-    setInput(selectedItem.title);
-    setBody(selectedItem.body);
-    }
-  }, [selectedItem]);
-
+export default function Body2({title, setTitle, body, setBody}) {
   return(
     <div className="flex-1 p-4 h-screen border-r border-gray-200"> 
       <div className="border-b border-gray-200 mb-5">
@@ -20,8 +9,8 @@ export default function Body2() {
           type="text"
           className="input input-ghost w-full"
           placeholder="テンプレートのタイトル"
-          value={input}
-          onChange={e => setInput(e.target.value)}
+          value={title}
+          onChange={e => setTitle(e.target.value)}
         />
       </div>     
       

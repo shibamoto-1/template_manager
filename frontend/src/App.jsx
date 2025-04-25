@@ -22,7 +22,6 @@ function App() {
       if (res?.data.isLogin === true) {
         setIsSignedIn(true);
         setCurrentUser(res?.data.data);
-        console.log(res);
       } else {
         console.log("no current user");
       }
@@ -62,14 +61,13 @@ function App() {
     >
       <BrowserRouter>
         <Routes>
-          <Route path="/test" element={<Test />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signin" element={<SignIn />} />
           <Route
             path="/"
             element={
               <Private>
-                <Template />
+                <Test />
               </Private>
             }
           />
