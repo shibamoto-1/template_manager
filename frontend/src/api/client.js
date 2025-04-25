@@ -7,7 +7,7 @@ const options = {
 
 const client = applyCaseMiddleware(
     axios.create({
-        baseURL: 'http://localhost:3010/api/v1',
+        baseURL: '${import.meta.env.VITE_BASE_URL}/api/v1',
     }),
     options
 );
