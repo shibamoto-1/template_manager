@@ -4,7 +4,6 @@ import { getCurrentUser } from "./api/auth";
 import { SignUp } from './components/pages/SignUp';
 import { SignIn } from './components/pages/SignIn';
 import Test from './components/pages/Test';
-import Template from './components/pages/Template';
 import Create from './components/pages/Create';
 
 import './App.css'

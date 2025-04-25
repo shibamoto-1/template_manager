@@ -5,10 +5,10 @@ import { useContext } from 'react';
 import { TemplateContext } from "../context/TemplateContext";
 
 export default function Sidebar() {
-  const { selectItem } = useContext(TemplateContext);
+  const { selectItem, categories } = useContext(TemplateContext);
+
   return (
     <div className="w-56 border-r border-gray-200">
-      <SearchForm />
       <Category />
       <Items />
     </div>

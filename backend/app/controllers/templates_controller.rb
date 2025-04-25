@@ -3,7 +3,8 @@ class TemplatesController < ApplicationController
 
   def index
     templates = current_api_v1_user.templates
-    render json: templates
+    categories = current_api_v1_user.categories
+    render json: { templates: templates, categories: categories }
   end
 
   def create

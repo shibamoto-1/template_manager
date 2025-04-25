@@ -6,11 +6,17 @@ export const TemplateContext = createContext();
 
 export default function TemplateProvider({ children }) {
   const [ templates, setTemplates ] = useState([]);
+  const [ categories, setCategories ] = useState([]);
   const [ selectedItem, setSelectedItem ] = useState(null);
+  const [ selectedCategory, setSelectedCategory ] = useState(null);
 
   const selectItem = (title) => {
     const matchContent =  templates.find((template) => template.title === title);
     setSelectedItem(matchContent);
+  }
+
+  const selectCategory = (name) => {
+    setSelectedCategory(name ? categories.find((category) => category.name === name) : null);
   }
 
   const fetch = async() => {
@@ -21,8 +27,10 @@ export default function TemplateProvider({ children }) {
         uid: Cookies.get("_uid"),
       },
     });
-    setTemplates(res.data);
+    setTemplates(res.data.templates);
+    setCategories(res.data.categories);
   }
+
   const createItem = async(title, body, category) => {
     await axios.post("http://localhost:3010/templates",
     {
@@ -73,7 +81,7 @@ export default function TemplateProvider({ children }) {
   }, [])
 
   return (
-    <TemplateContext.Provider value={{ templates, selectItem, selectedItem, createItem, updateTemplate, deleteItem }}>
+    <TemplateContext.Provider value={{ templates, categories, selectItem, selectedItem, createItem, updateTemplate, deleteItem, selectedCategory, selectCategory }}>
       {children}
     </TemplateContext.Provider>
   );
