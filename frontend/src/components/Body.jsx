@@ -1,28 +1,23 @@
-import Markdown from 'react-markdown';
-import { useState, useEffect } from 'react';
-
-export default function Body({ item, editBody }) {
-  const [ body, setBody ] = useState(item.body);
-
-  useEffect(() => {
-    setBody(item.body);
-  }, [item]);
-
-  return (
-    <div className="flex space-x-4">
-      <div className="w-1/2 border p-5">
-        <textarea 
-          value={body} 
-          onChange={e => setBody(e.target.value)}
-          className="w-full h-[300px]"
+export default function Body({title, setTitle, body, setBody}) {
+  return(
+    <div className="flex-1 p-4 h-screen border-r border-gray-200"> 
+      <div className="border-b border-gray-200 mb-5">
+        <input
+          type="text"
+          className="input input-ghost w-full"
+          placeholder="テンプレートのタイトル"
+          value={title}
+          onChange={e => setTitle(e.target.value)}
         />
-        <button className='btn btn-secondary' onClick={() => editBody(body, item.id)}>更新</button>
-      </div>
+      </div>     
       
-      <div className="w-1/2 border p-5">
-        <div className="prose">
-          <Markdown>{body}</Markdown>
-        </div>
+      <div className="w-full h-full pb-20">
+        <textarea
+          className="textarea size-full"
+          placeholder="テンプレートの内容を入力してください..."
+          value={body}
+          onChange={e => setBody(e.target.value)}
+        />
       </div>
     </div>
   )

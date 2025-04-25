@@ -1,14 +1,17 @@
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
 import axios from 'axios';
-import SelectItem from "../SelectItem"
-import Body from "../Body"
-import Form from "../Form";
-import Header from "../Header";
-import Cookies from "js-cookie";
 
-export default function Template() {
+export const TemplateContext = createContext();
+
+export default function TemplateProvider({ children }) {
   const [ templates, setTemplates ] = useState([]);
-  const [ selectedItem, setSelectedItem ] = useState({body: "アイテムを選択してください"});
+  const [ selectedItem, setSelectedItem ] = useState(null);
+
+  const selectItem = (title) => {
+    const matchContent =  templates.find((template) => template.title === title);
+    setSelectedItem(matchContent);
+  }
 
   const fetch = async() => {
     const res = await axios.get("http://localhost:3010/templates", {
@@ -20,16 +23,12 @@ export default function Template() {
     });
     setTemplates(res.data);
   }
-
-
-  const createItem = async(title, body, genre=1) => {
+  const createItem = async(title, body, category) => {
     await axios.post("http://localhost:3010/templates",
     {
-      template: {
       title: title,
       body: body,
-      category_id: genre
-      }
+      name: category
     },
     {
       headers: {
@@ -37,14 +36,21 @@ export default function Template() {
         client: Cookies.get("_client"),
         uid: Cookies.get("_uid"),
       }
-    }
-    );
+    });
     fetch();
   }
 
-  const editBody = async(body, id) => {
+  const updateTemplate = async(body, title, id) => {
     await axios.patch(`http://localhost:3010/templates/${id}`, {
+      title: title,
       body: body
+    },
+    {
+      headers: {
+        "access-token": Cookies.get("_access_token"),
+        client: Cookies.get("_client"),
+        uid: Cookies.get("_uid"),
+      }
     });
     fetch();
   }
@@ -58,14 +64,8 @@ export default function Template() {
         client: Cookies.get("_client"),
         uid: Cookies.get("_uid"),
       }
-    }
-    );
+    });
     fetch();
-  }
-
-  const selectItem = (title) => {
-    const matchContent =  templates.find((template) => template.title === title);
-    setSelectedItem(matchContent);
   }
 
   useEffect(() => {
@@ -73,14 +73,8 @@ export default function Template() {
   }, [])
 
   return (
-    <div className="w-full h-full">
-      <Header />
-      <Form createItem={createItem} />
-      <SelectItem templates={templates} selectItem={selectItem} deleteItem={deleteItem} />
-      <div className="container mx-auto px-4 py-6">
-        <Body item={selectedItem} editBody={editBody} />
-      </div>
-    </div>
-  )
+    <TemplateContext.Provider value={{ templates, selectItem, selectedItem, createItem, updateTemplate, deleteItem }}>
+      {children}
+    </TemplateContext.Provider>
+  );
 }
-

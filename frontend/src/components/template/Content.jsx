@@ -1,7 +1,7 @@
 import ContentHeader from "../ContentHeader";
-import Body2 from "../Body2";
+import Body from "../Body";
 import Preview from "../Preview";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { TemplateContext } from "../context/TemplateContext";
 
 export default function Content() {
@@ -33,7 +33,7 @@ export default function Content() {
     <div>
       <ContentHeader title={title} body={body} id={id} copy={copy} clickDeleteButton={clickDeleteButton} />
       <div className="flex flex-1">
-        <Body2 title={title} setTitle={setTitle} body={body} setBody={setBody}/>
+        <Body title={title} setTitle={setTitle} body={body} setBody={setBody}/>
         <Preview body={body} />
       </div>
     </div>
