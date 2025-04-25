@@ -34,6 +34,7 @@ export const SignIn = () => {
         setCurrentUser(res.data.data);
 
         navigate("/");
+        window.location.reload();
       }
     } catch (e) {
       console.log(e);
