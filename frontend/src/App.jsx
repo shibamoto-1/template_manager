@@ -4,9 +4,10 @@ import { getCurrentUser } from "./api/auth";
 import { SignUp } from './components/pages/SignUp';
 import { SignIn } from './components/pages/SignIn';
 import Test from './components/pages/Test';
-import Template from './components/pages/Template';
+import Create from './components/pages/Create';
 
 import './App.css'
+import TemplateProvider from './components/context/TemplateContext';
 
 export const AuthContext = createContext();
 
@@ -22,7 +23,6 @@ function App() {
       if (res?.data.isLogin === true) {
         setIsSignedIn(true);
         setCurrentUser(res?.data.data);
-        console.log(res);
       } else {
         console.log("no current user");
       }
@@ -60,21 +60,30 @@ function App() {
         setCurrentUser,
       }}
     >
-      <BrowserRouter>
-        <Routes>
-          <Route path="/test" element={<Test />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/signin" element={<SignIn />} />
-          <Route
-            path="/"
-            element={
-              <Private>
-                <Template />
-              </Private>
-            }
-          />
-        </Routes>
-      </BrowserRouter>
+      <TemplateProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route
+              path="/"
+              element={
+                <Private>
+                  <Test />
+                </Private>
+              }
+            />
+            <Route
+              path="/new"
+              element={
+                <Private>
+                  <Create />
+                </Private>
+              }
+            />
+          </Routes>
+        </BrowserRouter>
+      </TemplateProvider>
     </AuthContext.Provider>
   )
 }
