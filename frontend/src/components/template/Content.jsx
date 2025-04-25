@@ -1,7 +1,7 @@
 import ContentHeader from "../ContentHeader";
 import Body2 from "../Body2";
 import Preview from "../Preview";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { TemplateContext } from "../pages/Test";
 
 export default function Content() {
@@ -9,6 +9,10 @@ export default function Content() {
   const [ title, setTitle ] = useState("");
   const [ body, setBody ] = useState("");
   const [ id, setId ] = useState(null);
+
+  const copy = () => {
+    navigator.clipboard.writeText(body);
+  }
 
   useEffect(() => {
     if(selectedItem){
@@ -18,12 +22,13 @@ export default function Content() {
     }
   }, [selectedItem]);
 
+
   return(
     <div>
-      <ContentHeader title={title} body={body} id={id}/>
+      <ContentHeader title={title} body={body} id={id} copy={copy} />
       <div className="flex flex-1">
         <Body2 title={title} setTitle={setTitle} body={body} setBody={setBody}/>
-        <Preview body={body}/>
+        <Preview body={body} />
       </div>
     </div>
   )

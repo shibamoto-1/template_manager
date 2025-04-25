@@ -2,7 +2,7 @@ import { Copy, Edit, Save, Trash2 } from "lucide-react";
 import { useContext } from "react";
 import { TemplateContext } from "./pages/Test";
 
-export default function ContentHeader({title, body, id}) {
+export default function ContentHeader({title, body, id, copy}) {
 const { updateTemplate } = useContext(TemplateContext);
 
   return(
@@ -20,9 +20,9 @@ const { updateTemplate } = useContext(TemplateContext);
       </div>
 
       <div className="flex gap-2">
-      <button className="btn btn-sm btn-outline gap-1">
+        <button className="btn btn-sm btn-outline gap-1" onClick={() => copy()}>
           <Copy className="h-4 w-4" />
-          プレビューをコピー（不可）
+          テンプレートをコピー
         </button>
         <button className="btn btn-sm btn-outline btn-error gap-1">
           <Trash2 className="h-4 w-4" />
