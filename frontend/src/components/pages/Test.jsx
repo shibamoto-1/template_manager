@@ -55,7 +55,14 @@ export default function Test() {
   
   const deleteItem = async(id) => {
     if (!window.confirm(`本当に削除しますか？`)) return;
-    await axios.delete(`http://localhost:3010/templates/${id}`)
+    await axios.delete(`http://localhost:3010/templates/${id}`,
+    {
+      headers: {
+        "access-token": Cookies.get("_access_token"),
+        client: Cookies.get("_client"),
+        uid: Cookies.get("_uid"),
+      }
+    });
     fetch();
   }
 
@@ -64,7 +71,7 @@ export default function Test() {
   }, [])
 
   return (
-    <TemplateContext.Provider value={{ templates, selectItem, selectedItem, updateTemplate }}>
+    <TemplateContext.Provider value={{ templates, selectItem, selectedItem, updateTemplate, deleteItem }}>
       <div className="flex h-screen">
         <Sidebar />
         <div className="flex-1" >

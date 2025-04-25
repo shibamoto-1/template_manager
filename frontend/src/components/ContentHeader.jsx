@@ -2,8 +2,8 @@ import { Copy, Edit, Save, Trash2 } from "lucide-react";
 import { useContext } from "react";
 import { TemplateContext } from "./pages/Test";
 
-export default function ContentHeader({title, body, id, copy}) {
-const { updateTemplate } = useContext(TemplateContext);
+export default function ContentHeader({title, body, id, copy, clickDeleteButton}) {
+  const { updateTemplate, deleteItem } = useContext(TemplateContext);
 
   return(
     <div className="flex items-center justify-between border-b border-gray-200 p-3">
@@ -24,9 +24,9 @@ const { updateTemplate } = useContext(TemplateContext);
           <Copy className="h-4 w-4" />
           テンプレートをコピー
         </button>
-        <button className="btn btn-sm btn-outline btn-error gap-1">
+        <button className="btn btn-sm btn-outline btn-error gap-1" onClick={() => clickDeleteButton()}>
           <Trash2 className="h-4 w-4" />
-          削除（不可）
+          削除
         </button>
       </div>
 

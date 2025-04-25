@@ -5,13 +5,19 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { TemplateContext } from "../pages/Test";
 
 export default function Content() {
-  const { selectedItem } = useContext(TemplateContext);
+  const { selectedItem, deleteItem } = useContext(TemplateContext);
   const [ title, setTitle ] = useState("");
   const [ body, setBody ] = useState("");
   const [ id, setId ] = useState(null);
 
   const copy = () => {
     navigator.clipboard.writeText(body);
+  }
+
+  const clickDeleteButton = () => {
+    deleteItem(id);
+    setTitle("");
+    setBody("");
   }
 
   useEffect(() => {
@@ -25,7 +31,7 @@ export default function Content() {
 
   return(
     <div>
-      <ContentHeader title={title} body={body} id={id} copy={copy} />
+      <ContentHeader title={title} body={body} id={id} copy={copy} clickDeleteButton={clickDeleteButton} />
       <div className="flex flex-1">
         <Body2 title={title} setTitle={setTitle} body={body} setBody={setBody}/>
         <Preview body={body} />
