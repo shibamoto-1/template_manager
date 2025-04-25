@@ -2,7 +2,7 @@ import ContentHeader from "../ContentHeader";
 import Body2 from "../Body2";
 import Preview from "../Preview";
 import { useContext, useEffect, useRef, useState } from "react";
-import { TemplateContext } from "../pages/Test";
+import { TemplateContext } from "../context/TemplateContext";
 
 export default function Content() {
   const { selectedItem, deleteItem } = useContext(TemplateContext);

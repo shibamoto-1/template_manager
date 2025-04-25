@@ -1,5 +1,3 @@
-import { useContext, useEffect, useState } from "react"
-import { TemplateContext } from "./pages/Test";
 import Markdown from "react-markdown";
 
 export default function Preview({body}) {
@@ -13,7 +11,7 @@ export default function Preview({body}) {
         <div className="prose prose-sm">
           <Markdown>{body}</Markdown>
         </div>
-        </div>
+      </div>
     </div>
   )
 }

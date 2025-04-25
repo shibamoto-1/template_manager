@@ -1,6 +1,3 @@
-import { useContext, useEffect, useRef, useState } from "react"
-import { TemplateContext } from "./pages/Test";
-
 export default function Body2({title, setTitle, body, setBody}) {
   return(
     <div className="flex-1 p-4 h-screen border-r border-gray-200"> 
