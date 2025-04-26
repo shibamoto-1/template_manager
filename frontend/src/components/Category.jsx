@@ -1,8 +1,9 @@
 import { useContext } from "react"
 import { TemplateContext } from "./context/TemplateContext"
+import { X } from 'lucide-react'
 
 export default function Category() {
-  const { categories, selectCategory, selectedCategory } = useContext(TemplateContext);
+  const { categories, selectCategory, selectedCategory, handleDeleteCategory } = useContext(TemplateContext);
 
   return(
     <div className="px-4 py-2 border-b border-gray-200">
@@ -26,8 +27,11 @@ export default function Category() {
             }`}
             onClick={() => selectCategory(category.name)}
           >
-            <div className="flex items-center">
-              {category.name}
+            <div className="flex justify-between w-full items-center">
+              <p>
+                {category.name}
+              </p>
+              <X className="size-5 hover:text-red-500" onClick={() => handleDeleteCategory(category.id)} />
             </div>
           </li>
         ))}

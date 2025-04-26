@@ -2,11 +2,11 @@ import axios from "axios";
 import Cookies from 'js-cookie';
 
 const templateBaseURL = axios.create({
-    baseURL: `${import.meta.env.VITE_BASE_URL}/templates`
+    baseURL: `${import.meta.env.VITE_BASE_URL}`
   });
 
 export const getTemplates = () => {
-  return  templateBaseURL.get("/", {
+  return  templateBaseURL.get("/templates", {
     headers: {
       "access-token": Cookies.get("_access_token"),
       client: Cookies.get("_client"),
@@ -16,7 +16,7 @@ export const getTemplates = () => {
 };
 
 export const createTemplate = (title, body, category) => {
-  return templateBaseURL.post("/",
+  return templateBaseURL.post("/templates",
   {
     title: title,
     body: body,
@@ -32,7 +32,7 @@ export const createTemplate = (title, body, category) => {
 };
 
 export const updateTemplate = (body, title, id) => {
-  return templateBaseURL.patch(`/${id}`,
+  return templateBaseURL.patch(`/templates/${id}`,
   {
     title: title,
     body: body
@@ -47,7 +47,7 @@ export const updateTemplate = (body, title, id) => {
 };
 
 export const deleteTemplate = (id) => {
-  return templateBaseURL.delete(`/${id}`,
+  return templateBaseURL.delete(`/templates/${id}`,
   {
     headers: {
       "access-token": Cookies.get("_access_token"),
@@ -56,3 +56,14 @@ export const deleteTemplate = (id) => {
     }
   });
 };
+
+export const deleteCategory = (id) => {
+  return templateBaseURL.delete(`/categories/${id}`,
+  {
+    headers: {
+      "access-token": Cookies.get("_access_token"),
+      client: Cookies.get("_client"),
+      uid: Cookies.get("_uid"),
+    }
+  });
+}
