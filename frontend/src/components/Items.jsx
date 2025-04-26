@@ -27,7 +27,7 @@ export default function Items() {
             <li
               key={template.id}
               className={`px-2 py-1 text-sm border-b border-gray-100 cursor-pointer hover:bg-gray-50 ${
-                selectedItem?.id === template.id ? 'bg-blue-50' : ''
+                selectedItem?.id === template.id ? 'bg-gray-100' : ''
               }`}
               onClick={() => selectItem(template.title)}
             >
