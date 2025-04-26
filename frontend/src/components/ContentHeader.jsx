@@ -4,7 +4,7 @@ import { TemplateContext } from "./context/TemplateContext";
 import { Link } from "react-router-dom";
 
 export default function ContentHeader({title, body, id, copy, clickDeleteButton}) {
-  const { updateTemplate, deleteItem } = useContext(TemplateContext);
+  const { handleUpdateTemplate } = useContext(TemplateContext);
 
   return(
     <div className="flex items-center justify-between border-b border-gray-200 p-3">
@@ -17,7 +17,7 @@ export default function ContentHeader({title, body, id, copy, clickDeleteButton}
           </button>
         </Link>
         <button className="btn btn-sm btn-outline gap-1">
-          <Save className="h-4 w-4" onClick={() => updateTemplate(body, title, id)} />
+          <Save className="h-4 w-4" onClick={() => handleUpdateTemplate(body, title, id)} />
           更新
         </button>
       </div>
