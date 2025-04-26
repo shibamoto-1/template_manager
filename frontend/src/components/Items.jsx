@@ -33,13 +33,12 @@ export default function Items() {
             >
                 <div className="flex flex-col">
                   <div className="text-base">{template.title}</div>
-                  <span className="text-xs text-blue-600 my-1">{category.name}</span>
+                  <span className="text-xs text-blue-600 my-1">{category?.name}</span>
                 </div>
             </li>
           )
         })}
       </ul>
     </div>
-
   ) 
 }
