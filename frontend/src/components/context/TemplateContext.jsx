@@ -1,8 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
-import axios from 'axios';
 
-import { getTemplates } from '../../api/template';
+import { createTemplate, updateTemplate, deleteTemplate, getTemplates } from '../../api/template';
 
 export const TemplateContext = createContext();
 
@@ -26,60 +24,20 @@ export default function TemplateProvider({ children }) {
     setTemplates(res.data.templates);
     setCategories(res.data.categories);
   }
-  // const fetch = async() => {
-  //   const res = await axios.get("http://localhost:3010/templates", {
-  //     headers: {
-  //       "access-token": Cookies.get("_access_token"),
-  //       client: Cookies.get("_client"),
-  //       uid: Cookies.get("_uid"),
-  //     },
-  //   });
-  //   setTemplates(res.data.templates);
-  //   setCategories(res.data.categories);
-  // }
 
-  const createItem = async(title, body, category) => {
-    await axios.post("http://localhost:3010/templates",
-    {
-      title: title,
-      body: body,
-      name: category
-    },
-    {
-      headers: {
-        "access-token": Cookies.get("_access_token"),
-        client: Cookies.get("_client"),
-        uid: Cookies.get("_uid"),
-      }
-    });
+  const handleCreateTemplate = async(title, body, category) => {
+    await createTemplate(title, body, category);
     fetch();
   }
 
-  const updateTemplate = async(body, title, id) => {
-    await axios.patch(`http://localhost:3010/templates/${id}`, {
-      title: title,
-      body: body
-    },
-    {
-      headers: {
-        "access-token": Cookies.get("_access_token"),
-        client: Cookies.get("_client"),
-        uid: Cookies.get("_uid"),
-      }
-    });
+  const handleUpdateTemplate = async(body, title, id) => {
+    await updateTemplate(body, title, id);
     fetch();
   }
   
-  const deleteItem = async(id) => {
+  const handleDeleteTemplate = async(id) => {
     if (!window.confirm(`本当に削除しますか？`)) return;
-    await axios.delete(`http://localhost:3010/templates/${id}`,
-    {
-      headers: {
-        "access-token": Cookies.get("_access_token"),
-        client: Cookies.get("_client"),
-        uid: Cookies.get("_uid"),
-      }
-    });
+    await deleteTemplate(id);
     fetch();
   }
 
@@ -88,7 +46,7 @@ export default function TemplateProvider({ children }) {
   }, [])
 
   return (
-    <TemplateContext.Provider value={{ templates, categories, selectItem, selectedItem, createItem, updateTemplate, deleteItem, selectedCategory, selectCategory }}>
+    <TemplateContext.Provider value={{ templates, categories, selectItem, selectedItem, handleCreateTemplate, handleUpdateTemplate, handleDeleteTemplate, selectedCategory, selectCategory }}>
       {children}
     </TemplateContext.Provider>
   );

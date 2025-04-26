@@ -1,9 +1,9 @@
 import axios from "axios";
+import Cookies from 'js-cookie';
 
-const templateBaseURL = () => { axios.create({
+const templateBaseURL = axios.create({
     baseURL: `${import.meta.env.VITE_BASE_URL}/templates`
-  })
-};
+  });
 
 export const getTemplates = () => {
   return  templateBaseURL.get("/", {
@@ -15,7 +15,7 @@ export const getTemplates = () => {
   });
 };
 
-export const createItem = async(title, body, category) => {
+export const createTemplate = (title, body, category) => {
   return templateBaseURL.post("/",
   {
     title: title,
@@ -29,6 +29,30 @@ export const createItem = async(title, body, category) => {
       uid: Cookies.get("_uid"),
     }
   });
-  fetch();
 };
 
+export const updateTemplate = (body, title, id) => {
+  return templateBaseURL.patch(`/${id}`,
+  {
+    title: title,
+    body: body
+  },
+  {
+    headers: {
+      "access-token": Cookies.get("_access_token"),
+      client: Cookies.get("_client"),
+      uid: Cookies.get("_uid"),
+    }
+  });
+};
+
+export const deleteTemplate = (id) => {
+  return templateBaseURL.delete(`/${id}`,
+  {
+    headers: {
+      "access-token": Cookies.get("_access_token"),
+      client: Cookies.get("_client"),
+      uid: Cookies.get("_uid"),
+    }
+  });
+};

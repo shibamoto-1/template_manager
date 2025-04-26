@@ -9,12 +9,12 @@ export default function Create() {
   const [body, setBody] = useState("");
   const [category, setCategory] = useState("");
   
-  const { createItem } = useContext(TemplateContext);
+  const { handleCreateTemplate } = useContext(TemplateContext);
   const navigate = useNavigate();
 
 
   const create = () => {
-    createItem(title, body, category);
+    handleCreateTemplate(title, body, category);
     navigate("/");
   }
 

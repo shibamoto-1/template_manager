@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import { TemplateContext } from "../context/TemplateContext";
 
 export default function Content() {
-  const { selectedItem, deleteItem } = useContext(TemplateContext);
+  const { selectedItem, handleDeleteTemplate } = useContext(TemplateContext);
   const [ title, setTitle ] = useState("");
   const [ body, setBody ] = useState("");
   const [ id, setId ] = useState(null);
@@ -15,7 +15,7 @@ export default function Content() {
   }
 
   const clickDeleteButton = () => {
-    deleteItem(id);
+    handleDeleteTemplate(id);
     setTitle("");
     setBody("");
   }
