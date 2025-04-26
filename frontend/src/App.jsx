@@ -60,7 +60,6 @@ function App() {
         setCurrentUser,
       }}
     >
-      <TemplateProvider>
         <BrowserRouter>
           <Routes>
             <Route path="/signup" element={<SignUp />} />
@@ -69,7 +68,9 @@ function App() {
               path="/"
               element={
                 <Private>
-                  <Test />
+                  <TemplateProvider>
+                    <Test />
+                  </TemplateProvider>
                 </Private>
               }
             />
@@ -77,13 +78,14 @@ function App() {
               path="/new"
               element={
                 <Private>
-                  <Create />
+                  <TemplateProvider>
+                    <Create />
+                  </TemplateProvider>
                 </Private>
               }
             />
           </Routes>
         </BrowserRouter>
-      </TemplateProvider>
     </AuthContext.Provider>
   )
 }
