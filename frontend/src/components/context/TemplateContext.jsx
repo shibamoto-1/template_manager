@@ -2,6 +2,8 @@ import { createContext, useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 
+import { getTemplates } from '../../api/template';
+
 export const TemplateContext = createContext();
 
 export default function TemplateProvider({ children }) {
@@ -20,16 +22,21 @@ export default function TemplateProvider({ children }) {
   }
 
   const fetch = async() => {
-    const res = await axios.get("http://localhost:3010/templates", {
-      headers: {
-        "access-token": Cookies.get("_access_token"),
-        client: Cookies.get("_client"),
-        uid: Cookies.get("_uid"),
-      },
-    });
+    const res = await getTemplates();
     setTemplates(res.data.templates);
     setCategories(res.data.categories);
   }
+  // const fetch = async() => {
+  //   const res = await axios.get("http://localhost:3010/templates", {
+  //     headers: {
+  //       "access-token": Cookies.get("_access_token"),
+  //       client: Cookies.get("_client"),
+  //       uid: Cookies.get("_uid"),
+  //     },
+  //   });
+  //   setTemplates(res.data.templates);
+  //   setCategories(res.data.categories);
+  // }
 
   const createItem = async(title, body, category) => {
     await axios.post("http://localhost:3010/templates",

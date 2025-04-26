@@ -19,8 +19,7 @@ export const SignIn = () => {
     return signInParams;
   };
 
-  const handleSignInSubmit = async (e) => {
-    e.preventDefault();
+  const handleSignInSubmit = async () => {
     const params = generateParams();
 
     try {
