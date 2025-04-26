@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 
-import { createTemplate, updateTemplate, deleteTemplate, getTemplates } from '../../api/template';
+import { createTemplate, updateTemplate, deleteTemplate, getTemplates, deleteCategory } from '../../api/template';
 
 export const TemplateContext = createContext();
 
@@ -41,12 +41,18 @@ export default function TemplateProvider({ children }) {
     fetch();
   }
 
+  const handleDeleteCategory = async(id) => {
+    if (!window.confirm(`本当に削除しますか？`)) return;
+    await deleteCategory(id);
+    fetch();
+  }
+
   useEffect(() => {
     fetch();
   }, [])
 
   return (
-    <TemplateContext.Provider value={{ templates, categories, selectItem, selectedItem, handleCreateTemplate, handleUpdateTemplate, handleDeleteTemplate, selectedCategory, selectCategory }}>
+    <TemplateContext.Provider value={{ templates, categories, selectItem, selectedItem, handleCreateTemplate, handleUpdateTemplate, handleDeleteTemplate, selectedCategory, selectCategory, handleDeleteCategory }}>
       {children}
     </TemplateContext.Provider>
   );
