@@ -12,7 +12,6 @@ export default function Header() {
   const handleSignOutClick = async() => {
     try {
       const res = await signOut();
-      console.log(res);
 
       navigate("/signin");
     } catch (error) {
