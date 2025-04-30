@@ -1,12 +1,15 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signUp } from "../../api/auth";
+import Cookies from "js-cookie";
+import { AuthContext } from "../../App";
 
 export const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
+  const { setIsSignedIn } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const generateParams = () => {
@@ -20,21 +23,21 @@ export const SignUp = () => {
     return signUpParams;
   };
 
-  const handleSignUpSubmit = async (e) => {
+  const handleSignUpSubmit = async () => {
     const params = generateParams();
     try {
       const res = await signUp(params);
-      Cookies.set("_access_token", res.data.token["access-token"]);
+      Cookies.set("_access_token", res.data.token["accessToken"]);
       Cookies.set("_client", res.data.token["client"]);
       Cookies.set("_uid", res.data.token["uid"]);
 
+      setIsSignedIn(true);
       navigate("/");
-      window.location.reload();
     } catch (e) {
-      console.log("Error response:", e.response); 
+      console.log("Error response:", e); 
     }
   };
-  
+
   return (
     <div className="w-full h-screen">
       <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-md border p-5 mt-20 mx-auto">
@@ -73,7 +76,7 @@ export const SignUp = () => {
           onChange={(e) => setPasswordConfirmation(e.target.value)}
         />
 
-        <button type="submit" className="btn btn-primary mt-4" onClick={(e) => handleSignUpSubmit(e)}>
+        <button type="submit" className="btn btn-primary mt-4" onClick={() => handleSignUpSubmit()}>
           アカウント作成
         </button>
 

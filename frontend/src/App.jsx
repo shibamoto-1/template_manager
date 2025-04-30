@@ -21,14 +21,12 @@ function App() {
 
       if (res?.data.isLogin === true) {
         setIsSignedIn(true);
-        setCurrentUser(res?.data.data);
       } else {
         console.log("no current user");
       }
     } catch (e) {
       console.log(e);
     }
-
     setLoading(false);
   };
 
@@ -44,6 +42,7 @@ function App() {
         return <Navigate to="/signin" />;
       }
     } else {
+      // API通信中にNavigateに行かないようにする
       return <></>;
     }
   };

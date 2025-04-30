@@ -5,7 +5,7 @@ import { signIn } from "../../api/auth";
 import { AuthContext } from "../../App";
 
 export const SignIn = () => {
-  const { setIsSignedIn, setCurrentUser } = useContext(AuthContext);
+  const { setIsSignedIn } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -24,10 +24,13 @@ export const SignIn = () => {
 
     try {
       const res = await signIn(params);
+      console.log(res)
       if (res.status === 200) {
         Cookies.set("_access_token", res.headers["access-token"]);
         Cookies.set("_client", res.headers["client"]);
         Cookies.set("_uid", res.headers["uid"]);
+
+        setIsSignedIn(true);
         navigate("/");
       }
     } catch (e) {
