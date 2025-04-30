@@ -28,17 +28,13 @@ export const SignIn = () => {
         Cookies.set("_access_token", res.headers["access-token"]);
         Cookies.set("_client", res.headers["client"]);
         Cookies.set("_uid", res.headers["uid"]);
-
-        setIsSignedIn(true);
-        setCurrentUser(res.data.data);
-
         navigate("/");
-        window.location.reload();
       }
     } catch (e) {
       console.log(e);
     }
   };
+
   return (
     <div className="w-full h-screen">
       <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-md border p-5 mt-20 mx-auto">

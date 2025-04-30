@@ -21,17 +21,20 @@ export const SignUp = () => {
   };
 
   const handleSignUpSubmit = async (e) => {
-    e.preventDefault();
     const params = generateParams();
     try {
       const res = await signUp(params);
-      console.log(res);
-      alert("登録しました");
-      navigate("/signin");
+      Cookies.set("_access_token", res.data.token["access-token"]);
+      Cookies.set("_client", res.data.token["client"]);
+      Cookies.set("_uid", res.data.token["uid"]);
+
+      navigate("/");
+      window.location.reload();
     } catch (e) {
       console.log("Error response:", e.response); 
     }
   };
+  
   return (
     <div className="w-full h-screen">
       <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-md border p-5 mt-20 mx-auto">

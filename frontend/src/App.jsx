@@ -14,7 +14,6 @@ export const AuthContext = createContext();
 function App() {
   const [loading, setLoading] = useState(true);
   const [isSignedIn, setIsSignedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState({});
 
   const handleGetCurrentUser = async () => {
     try {
@@ -42,7 +41,7 @@ function App() {
       if (isSignedIn) {
         return children;
       } else {
-        return <Navigate to="signin" />;
+        return <Navigate to="/signin" />;
       }
     } else {
       return <></>;
@@ -56,8 +55,6 @@ function App() {
         setLoading,
         isSignedIn,
         setIsSignedIn,
-        currentUser,
-        setCurrentUser,
       }}
     >
         <BrowserRouter>
