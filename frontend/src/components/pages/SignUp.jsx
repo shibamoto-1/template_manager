@@ -32,7 +32,7 @@ export const SignUp = () => {
       Cookies.set("_uid", res.data.token["uid"]);
 
       setIsSignedIn(true);
-      navigate("/");
+      navigate("/template");
     } catch (e) {
       console.log("Error response:", e); 
     }

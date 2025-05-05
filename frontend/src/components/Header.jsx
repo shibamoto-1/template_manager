@@ -31,8 +31,8 @@ export default function Header() {
         </nav>
       ) : (
         <nav className="space-x-4">
-          <Link to="/signup">Sign Up</Link>
-          <Link to="/signin">Sign In</Link>
+          <Link to="/signup">会員登録</Link>
+          <Link to="/signin">ログイン</Link>
         </nav>
       )}
     </header>

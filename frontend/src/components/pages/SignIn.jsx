@@ -31,7 +31,7 @@ export const SignIn = () => {
         Cookies.set("_uid", res.headers["uid"]);
 
         setIsSignedIn(true);
-        navigate("/");
+        navigate("/template");
       }
     } catch (e) {
       console.log(e);

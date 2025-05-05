@@ -15,7 +15,7 @@ export default function Create() {
 
   const create = () => {
     handleCreateTemplate(title, body, category);
-    navigate("/");
+    navigate("/template");
   }
 
   return(
@@ -47,7 +47,7 @@ export default function Create() {
             </div>
           </div>
           <div className="flex justify-end gap-3 mt-5">
-            <Link to="/">
+            <Link to="/template">
               <button className="btn">キャンセル</button>
             </Link>
             <button className="btn btn-primary" onClick={() => create()}>保存</button>

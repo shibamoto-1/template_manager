@@ -6,7 +6,7 @@
 ### URL
 https://template-manager-eta.vercel.app/ </br>
 （独自ドメインを予定しています。）
-***
+
 |トップページ|テンプレート作成画面|
 |---|---|
 |![](https://github.com/user-attachments/assets/56185ce8-2d21-4167-a811-54790f41550c)|![](https://github.com/user-attachments/assets/a2a4a75e-2c74-4a4b-974c-690a257098f6)|

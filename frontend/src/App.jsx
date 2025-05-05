@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { createContext, useState, useEffect } from 'react';
 import { getCurrentUser } from "./api/auth";
+import Home from './components/pages/home';
 import { SignUp } from './components/pages/SignUp';
 import { SignIn } from './components/pages/SignIn';
 import Test from './components/pages/Test';
@@ -58,10 +59,11 @@ function App() {
     >
         <BrowserRouter>
           <Routes>
+            <Route path="/" element={<Home />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />
             <Route
-              path="/"
+              path="/template"
               element={
                 <Private>
                   <TemplateProvider>
