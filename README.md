@@ -1,17 +1,33 @@
-### backend
-`cd backend/`
-```
-bundle install
-rails db:migrate
-```
+# Templi
+***
+## サービス概要（トップページのスクショも貼りましょう）
+テンプレートを作成、管理するwebアプリケーションです。
+カテゴリを紐づけたり、マークダウン記法を使用することもできます。
 
-### frontend
-`cd frontend/`
-```
-npm install
-npm run dev
-```
+URL（デプロイしたURLを記載しましょう）
+https://template-manager-eta.vercel.app/
+（独自ドメインは来週中を予定しています。）
 
-### 注意点
-- emailは「xxx@xxx.xxx」の形式で作成してください
-- アカウント作成後ページが遷移しない状態になっています。作成後サインインページに移動しそこでログインするとHome画面に移動できます。
+## 使用技術
+**フロントエンド、バックエンド**
+- React
+- Ruby on Rails
+**デプロイ**
+- Vercel
+- render
+
+## 機能一覧
+**ユーザー周り**
+- ユーザー作成、ログインログアウト
+- Cookieを使用したセッション維持
+**テンプレート**
+- テンプレートの作成
+- カテゴリを使ったテンプレートのフィルター
+- マークダウン記法の適用
+- ボタンを押下してテンプレートをコピー
+
+## 環境構築手順
+- フロントにReactを使用するのでAPIモードでRails new
+- Viteを使用してReact開発環境を作成
+- CSSはTailwind CSSとDaisy UIを使用
+- ページデザイン案はMotiffを使用して作成
