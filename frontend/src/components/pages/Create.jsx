@@ -29,9 +29,9 @@ export default function Create() {
             <label htmlFor="title">テンプレート名</label>
             <input type="text" placeholder="テンプレート名を入力" className="input" value={title} onChange={e => setTitle(e.target.value)}/>
           </div>
-          <div>
+          <div className="flex flex-col">
             <label htmlFor="body">テンプレート内容</label>
-            <textarea name="body" id="body" cols="30" rows="10" className={"textarea size-full"} value={body} onChange={(e) => setBody(e.target.value)} />
+            <textarea name="body" id="body" cols="30" rows="30" className="textarea w-full" value={body} onChange={(e) => setBody(e.target.value)} />
           </div>
         </div>
 
@@ -41,7 +41,7 @@ export default function Create() {
             <label htmlFor="category">カテゴリー</label>
             <input type="text" placeholder="カテゴリ名を入力" className="input" value={category} onChange={e => setCategory(e.target.value)} />
           </div>
-          <div className="w-full h-40 border border-gray-300 rounded px-5 pt-2 pb-20">
+          <div className="w-full min-h-[70%] max-h-screen border border-gray-300 rounded px-5 pt-2 pb-20">
             <div className="prose prose-sm">
               <Markdown>{body}</Markdown>
             </div>
