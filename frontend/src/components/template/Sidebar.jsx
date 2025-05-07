@@ -1,5 +1,5 @@
 import SearchForm from '../SearchForm';
-import Category from '../Category';
+import CategoryBar from '../CategoryBar';
 import Items from '../Items';
 import { useContext } from 'react';
 import { TemplateContext } from "../context/TemplateContext";
@@ -9,7 +9,7 @@ export default function Sidebar() {
 
   return (
     <div className="w-56 border-r border-gray-200">
-      <Category />
+      <CategoryBar />
       <Items />
     </div>
   )
