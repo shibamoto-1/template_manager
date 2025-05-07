@@ -3,10 +3,11 @@ import { useContext } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { AuthContext } from "../App"
 import { signOut } from "../api/auth";
+import Cookies from "js-cookie";
 
 export default function Header() {
-  const { isSignedIn, isGuest } = useContext(AuthContext);
-
+  const { isSignedIn } = useContext(AuthContext);
+  const isGuest = Cookies.get("_is_guest");
   const navigate = useNavigate();
 
   const handleSignOutClick = async() => {
