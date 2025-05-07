@@ -1,8 +1,28 @@
 import { Box, CircleArrowRight, SquareChartGantt } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../Header";
+import { guestLogin } from "../../api/auth";
+import { useContext } from "react";
+import { AuthContext } from "../../App";
+import Cookies from "js-cookie";
+
 
 export default function Home() {
+  const { setIsSignedIn, setIsGuest } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleGuestLogin = async(e) => {
+    e.preventDefault();
+    const res = await guestLogin();
+    Cookies.set("_access_token", res.data.token["accessToken"]);
+    Cookies.set("_client", res.data.token["client"]);
+    Cookies.set("_uid", res.data.token["uid"]);
+
+    setIsSignedIn(true);
+    setIsGuest(true);
+    navigate("/template");
+  }
+
   return (
   <div className="text-center">
     <Header />
@@ -15,12 +35,12 @@ export default function Home() {
         <Link to="/signup">
           <button className="btn btn-primary">アカウント作成</button>
         </Link>
-        <Link to="#">
-          <button className="btn btn-secondary pl-4 pr-[12px]">
+        <form onSubmit={handleGuestLogin}>
+          <button type="submit" className="btn btn-secondary pl-4 pr-[12px]">
             <p>デモを見る</p>
             <CircleArrowRight className="size-6 px-[2px] ml-[2px]" strokeWidth={1.5}/>
           </button>
-        </Link>
+        </form>
       </div>
     </div>
 

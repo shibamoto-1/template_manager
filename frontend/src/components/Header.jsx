@@ -5,7 +5,7 @@ import { AuthContext } from "../App"
 import { signOut } from "../api/auth";
 
 export default function Header() {
-  const { isSignedIn } = useContext(AuthContext);
+  const { isSignedIn, isGuest } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -25,7 +25,7 @@ export default function Header() {
         <img src={Logo} />
       </h1>
 
-      {isSignedIn ? (
+      {isSignedIn && !isGuest ? (
         <nav onClick={() => handleSignOutClick()}>
           <span>ログアウト</span>
         </nav>

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       namespace :auth do
         resources :sessions, only: %i[index]
       end
+      post 'guest_login', to: 'guest_sessions#create'
     end
   end
 
