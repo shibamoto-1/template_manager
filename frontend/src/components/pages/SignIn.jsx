@@ -3,27 +3,19 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signIn } from "../../api/auth";
 import { AuthContext } from "../../App";
+import { useForm } from "react-hook-form";
 
 export const SignIn = () => {
+  const { register, handleSubmit, watch, formState: { errors } } = useForm({mode: "onChange"});
   const { setIsSignedIn } = useContext(AuthContext);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
   const navigate = useNavigate();
 
-  const generateParams = () => {
-    const signInParams = {
-      email: email,
-      password: password,
-    };
-    return signInParams;
-  };
+  // モーダルに変更予定
+  const [isError, setIsError] = useState(false);
 
-  const handleSignInSubmit = async () => {
-    const params = generateParams();
-
+  const onSubmit = async(data) => {
     try {
-      const res = await signIn(params);
+      const res = await signIn(data);
       if (res.status === 200) {
         Cookies.set("_access_token", res.headers["access-token"]);
         Cookies.set("_client", res.headers["client"]);
@@ -35,43 +27,50 @@ export const SignIn = () => {
       }
     } catch (e) {
       console.log(e);
+      setIsError(true);
     }
-  };
+  }
 
   return (
     <div className="w-full h-screen">
       <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-md border p-5 mt-20 mx-auto">
         <legend className="fieldset-legend">Sign In</legend>
 
+        {/* モーダルに変更予定 */}
+        {isError && <p className="text-red-400 mb-4">メールアドレスまたはパスワードが間違っています。</p>}
+
         <label className="label" htmlFor="email">Email</label>
         <input
             type="email"
             id="email"
-            name="email"
             placeholder="Email"
             className="input"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            {...register("email", {
+              required: "メールアドレスは必須です。",
+              pattern: {value: /^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/, message: "メールアドレスの形式が違います。"},
+            })}
           />
+          <p className="text-red-400">{errors?.email?.message}</p>
 
         <label className="label" htmlFor="password">Password</label>
         <input
             type="password"
             id="password"
-            name="password"
             placeholder="Password"
             className="input"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            {...register("password", {
+              required: "パスワードは必須です。", 
+              minLength: {value: 6, message: "パスワードは6文字以上で入力してください。"},
+            })}
           />
-        
+          <p className="text-red-400">{errors?.password?.message}</p>
 
-        <button type="submit" className="btn btn-primary mt-4" onClick={(e) => handleSignInSubmit(e)}>
+
+        <button type="submit" className="btn btn-primary mt-4" onClick={handleSubmit(onSubmit)}>
           ログイン
         </button>
 
         <Link to="/signup">サインアップへ</Link>
-
       </fieldset>
     </div>
   );
