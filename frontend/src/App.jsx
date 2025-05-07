@@ -21,7 +21,7 @@ function App() {
     try {
       const res = await getCurrentUser();
 
-      if (res?.data.isLogin === true) {
+      if (res.status === 200) {
         setIsSignedIn(true);
       } else {
         console.log("no current user");
