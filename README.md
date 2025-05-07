@@ -9,7 +9,7 @@ https://template-manager-eta.vercel.app/ </br>
 
 |トップページ|テンプレート作成画面|
 |---|---|
-|![](https://github.com/user-attachments/assets/bb2e69b5-3651-4a63-8da0-ee60e2a48802)|![](https://github.com/user-attachments/assets/7cb9f646-336f-4126-b9ad-f78a51bca1e3)|
+|![](https://github.com/user-attachments/assets/56185ce8-2d21-4167-a811-54790f41550c)|![](https://github.com/user-attachments/assets/a2a4a75e-2c74-4a4b-974c-690a257098f6)|
 
 
 ## 使用技術
