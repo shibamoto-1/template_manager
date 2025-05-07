@@ -28,6 +28,7 @@ export const SignIn = () => {
         Cookies.set("_access_token", res.headers["access-token"]);
         Cookies.set("_client", res.headers["client"]);
         Cookies.set("_uid", res.headers["uid"]);
+        Cookies.remove("_is_guest");
 
         setIsSignedIn(true);
         navigate("/template");

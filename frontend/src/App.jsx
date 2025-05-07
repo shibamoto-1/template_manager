@@ -15,7 +15,6 @@ export const AuthContext = createContext();
 function App() {
   const [loading, setLoading] = useState(true);
   const [isSignedIn, setIsSignedIn] = useState(false);
-  const [isGuest , setIsGuest] = useState(false);
 
   const handleGetCurrentUser = async () => {
     try {
@@ -56,8 +55,6 @@ function App() {
         setLoading,
         isSignedIn,
         setIsSignedIn,
-        isGuest,
-        setIsGuest,
       }}
     >
         <BrowserRouter>

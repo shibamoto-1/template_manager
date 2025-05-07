@@ -8,7 +8,7 @@ import Cookies from "js-cookie";
 
 
 export default function Home() {
-  const { setIsSignedIn, setIsGuest } = useContext(AuthContext);
+  const { setIsSignedIn } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleGuestLogin = async(e) => {
@@ -17,9 +17,9 @@ export default function Home() {
     Cookies.set("_access_token", res.data.token["accessToken"]);
     Cookies.set("_client", res.data.token["client"]);
     Cookies.set("_uid", res.data.token["uid"]);
+    Cookies.set("_is_guest", "true");
 
     setIsSignedIn(true);
-    setIsGuest(true);
     navigate("/template");
   }
 
