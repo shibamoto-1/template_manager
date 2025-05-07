@@ -39,3 +39,7 @@ export const getCurrentUser = () => {
     },
   });
 };
+
+export const guestLogin = () => {
+  return client.post("/guest_login");
+}

@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { createContext, useState, useEffect } from 'react';
 import { getCurrentUser } from "./api/auth";
+import Home from './components/pages/Home';
 import { SignUp } from './components/pages/SignUp';
 import { SignIn } from './components/pages/SignIn';
 import Test from './components/pages/Test';
@@ -14,6 +15,7 @@ export const AuthContext = createContext();
 function App() {
   const [loading, setLoading] = useState(true);
   const [isSignedIn, setIsSignedIn] = useState(false);
+  const [isGuest , setIsGuest] = useState(false);
 
   const handleGetCurrentUser = async () => {
     try {
@@ -54,14 +56,17 @@ function App() {
         setLoading,
         isSignedIn,
         setIsSignedIn,
+        isGuest,
+        setIsGuest,
       }}
     >
         <BrowserRouter>
           <Routes>
+            <Route path="/" element={<Home />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />
             <Route
-              path="/"
+              path="/template"
               element={
                 <Private>
                   <TemplateProvider>

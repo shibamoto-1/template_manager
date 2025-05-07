@@ -10,7 +10,7 @@ export default function ContentHeader({title, body, id, copy, clickDeleteButton}
     <div className="flex items-center justify-between border-b border-gray-200 p-3">
 
       <div className="flex gap-2">
-        <Link to="new">
+        <Link to="/new">
           <button className="btn btn-sm btn-primary gap-1">
             <Edit className="h-4 w-4" />
             新規作成
