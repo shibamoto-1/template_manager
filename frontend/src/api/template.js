@@ -57,6 +57,20 @@ export const deleteTemplate = (id) => {
   });
 };
 
+export const updateCategoryName = (id, name) => {
+  return templateBaseURL.patch(`/categories/${id}`,
+  {
+    name: name
+  },
+  {
+    headers: {
+      "access-token": Cookies.get("_access_token"),
+      client: Cookies.get("_client"),
+      uid: Cookies.get("_uid"),
+    }
+  })
+}
+
 export const deleteCategory = (id) => {
   return templateBaseURL.delete(`/categories/${id}`,
   {
