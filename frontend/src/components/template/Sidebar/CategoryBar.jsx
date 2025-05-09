@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { TemplateContext } from "./context/TemplateContext";
+import { TemplateContext } from "../../context/TemplateContext";
 import Category from "./Category";
 
 export default function CategoryBar() {

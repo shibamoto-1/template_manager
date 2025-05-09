@@ -1,8 +1,8 @@
-import Sidebar from '../template/Sidebar';
-import Content from '../template/Content';
+import Sidebar from './Sidebar/Sidebar';
+import Content from './Content/Content';
 import Header from '../Header';
 
-export default function Test() {
+export default function Template() {
   return (
     <>
       <Header />

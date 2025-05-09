@@ -1,6 +1,6 @@
 import { EllipsisVertical } from 'lucide-react';
 import { useContext, useEffect, useRef, useState } from 'react';
-import { TemplateContext } from './context/TemplateContext';
+import { TemplateContext } from '../../context/TemplateContext';
 
 export default function Category({ templateSum, category = null }) {
   const { selectCategory, selectedCategory, handleUpdateCategoryName, handleDeleteCategory } = useContext(TemplateContext);
