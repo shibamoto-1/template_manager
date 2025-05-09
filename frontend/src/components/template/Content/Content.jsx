@@ -1,8 +1,8 @@
-import ContentHeader from "../ContentHeader";
-import Body from "../Body";
-import Preview from "../Preview";
+import ContentHeader from "./ContentHeader";
+import Body from "./Body";
+import Preview from "./Preview";
 import { useContext, useEffect, useState } from "react";
-import { TemplateContext } from "../context/TemplateContext";
+import { TemplateContext } from "../../context/TemplateContext";
 
 export default function Content() {
   const { selectedItem, handleDeleteTemplate } = useContext(TemplateContext);

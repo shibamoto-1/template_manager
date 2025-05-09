@@ -1,6 +1,6 @@
 import { Copy, Edit, Save, Trash2 } from "lucide-react";
 import { useContext } from "react";
-import { TemplateContext } from "./context/TemplateContext";
+import { TemplateContext } from "../../context/TemplateContext";
 import { Link } from "react-router-dom";
 
 export default function ContentHeader({title, body, id, copy, clickDeleteButton}) {

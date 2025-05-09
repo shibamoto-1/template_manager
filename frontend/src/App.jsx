@@ -4,11 +4,11 @@ import { getCurrentUser } from "./api/auth";
 import Home from './components/pages/Home';
 import { SignUp } from './components/pages/SignUp';
 import { SignIn } from './components/pages/SignIn';
-import Test from './components/pages/Test';
-import Create from './components/pages/Create';
+import Create from './components/template/Create';
 
 import './App.css'
 import TemplateProvider from './components/context/TemplateContext';
+import Template from './components/template/Template';
 
 export const AuthContext = createContext();
 
@@ -67,7 +67,7 @@ function App() {
               element={
                 <Private>
                   <TemplateProvider>
-                    <Test />
+                    <Template />
                   </TemplateProvider>
                 </Private>
               }

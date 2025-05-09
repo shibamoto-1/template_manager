@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react"
-import { TemplateContext } from "./context/TemplateContext"
+import { TemplateContext } from "../../context/TemplateContext"
 
 export default function Items() {
   const { templates, selectItem, selectedItem, categories, selectedCategory } = useContext(TemplateContext);

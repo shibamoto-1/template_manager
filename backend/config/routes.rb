@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   end
 
   resources :templates, only: [:index, :create, :update, :destroy]
-  delete "categories/:id" => "categories#destroy"
+  resources :categories, only: [:update, :destroy]
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
