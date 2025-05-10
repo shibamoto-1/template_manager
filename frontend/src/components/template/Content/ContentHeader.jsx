@@ -1,10 +1,26 @@
 import { Copy, Edit, Save, Trash2 } from "lucide-react";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { TemplateContext } from "../../context/TemplateContext";
 import { Link } from "react-router-dom";
+import Tooltip from "../../ToolTip";
 
 export default function ContentHeader({title, body, id, copy, clickDeleteButton}) {
   const { handleUpdateTemplate } = useContext(TemplateContext);
+  const [showTooltip, setShowTooltip] = useState(false);
+  
+  const handleCopy = () => {
+    setShowTooltip(true);
+    copy();
+  }
+
+  useEffect(() => {
+    if (showTooltip) {
+      setTimeout(() => {
+        setShowTooltip(false);
+      }, 2000);
+    }
+  }, [showTooltip]);
+
 
   return(
     <div className="flex items-center justify-between border-b border-gray-200 p-3">
@@ -23,7 +39,8 @@ export default function ContentHeader({title, body, id, copy, clickDeleteButton}
       </div>
 
       <div className="flex gap-2">
-        <button className="btn btn-sm btn-outline gap-1" onClick={() => copy()}>
+        <button className="btn btn-sm btn-outline gap-1 relative" onClick={() => handleCopy()}>
+          {showTooltip && <Tooltip />}
           <Copy className="h-4 w-4" />
           テンプレートをコピー
         </button>
