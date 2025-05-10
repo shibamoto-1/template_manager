@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { signIn } from "../../api/auth";
 import { AuthContext } from "../../App";
 import { useForm } from "react-hook-form";
+import Button from "../Button";
 
 export const SignIn = () => {
   const { register, handleSubmit, watch, formState: { errors } } = useForm({mode: "onChange"});
@@ -65,10 +66,9 @@ export const SignIn = () => {
           />
           <p className="text-red-400">{errors?.password?.message}</p>
 
-
-        <button type="submit" className="btn btn-primary mt-4" onClick={handleSubmit(onSubmit)}>
+        <Button type="submit" className="btn-primary mt-4" onClick={handleSubmit(onSubmit)}>
           ログイン
-        </button>
+        </Button>
 
         <Link to="/signup">サインアップへ</Link>
       </fieldset>

@@ -4,6 +4,8 @@ import { signUp } from "../../api/auth";
 import Cookies from "js-cookie";
 import { AuthContext } from "../../App";
 import { useForm } from "react-hook-form";
+import Button from "../Button";
+
 
 export const SignUp = () => {
   const { register, handleSubmit, watch, formState: { errors } } = useForm({mode: "onChange"});
@@ -82,10 +84,9 @@ export const SignUp = () => {
         />
         <p className="text-red-400">{errors?.passwordConfirmation?.message}</p>
 
-
-        <button type="submit" className="btn btn-primary mt-4" onClick={handleSubmit(onSubmit)}>
+        <Button type="submit" className="btn-primary mt-4" onClick={handleSubmit(onSubmit)}>
           アカウント作成
-        </button>
+        </Button>
 
         <Link to="/signin">サインインへ</Link>
       </fieldset>

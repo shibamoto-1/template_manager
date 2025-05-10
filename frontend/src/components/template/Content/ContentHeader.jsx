@@ -3,11 +3,12 @@ import { useContext, useEffect, useState } from "react";
 import { TemplateContext } from "../../context/TemplateContext";
 import { Link } from "react-router-dom";
 import Tooltip from "../../ToolTip";
+import Button from "../../Button";
 
 export default function ContentHeader({title, body, id, copy, clickDeleteButton}) {
   const { handleUpdateTemplate } = useContext(TemplateContext);
   const [showTooltip, setShowTooltip] = useState(false);
-  
+
   const handleCopy = () => {
     setShowTooltip(true);
     copy();
@@ -27,30 +28,33 @@ export default function ContentHeader({title, body, id, copy, clickDeleteButton}
 
       <div className="flex gap-2">
         <Link to="/new">
-          <button className="btn btn-sm btn-primary gap-1">
+          <Button className="btn-primary btn-sm gap-1">
             <Edit className="h-4 w-4" />
             新規作成
-          </button>
+          </Button>
         </Link>
-        <button className="btn btn-sm btn-outline gap-1">
-          <Save className="h-4 w-4" onClick={() => handleUpdateTemplate(body, title, id)} />
+
+        <Button className="btn-outline btn-sm gap-1"
+                onClick={() => handleUpdateTemplate(body, title, id)}>
+          <Save className="h-4 w-4" />
           更新
-        </button>
+        </Button>
       </div>
 
       <div className="flex gap-2">
-        <button className="btn btn-sm btn-outline gap-1 relative" onClick={() => handleCopy()}>
+        <Button className="btn-outline btn-sm gap-1 relative" 
+                onClick={() => handleCopy()}>
           {showTooltip && <Tooltip />}
           <Copy className="h-4 w-4" />
           テンプレートをコピー
-        </button>
-        <button className="btn btn-sm btn-outline btn-error gap-1" onClick={() => clickDeleteButton()}>
+        </Button>
+
+        <Button className="btn-outline btn-sm btn-error gap-1"
+                onClick={() => clickDeleteButton()}>
           <Trash2 className="h-4 w-4" />
           削除
-        </button>
+        </Button>
       </div>
-
     </div>
-
   )
 }
