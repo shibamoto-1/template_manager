@@ -10,9 +10,8 @@ export default function TemplateProvider({ children }) {
   const [ selectedItem, setSelectedItem ] = useState(null);
   const [ selectedCategory, setSelectedCategory ] = useState(null);
 
-  const selectItem = (id) => {
-    const matchContent =  templates.find((template) => template.id === id);
-    setSelectedItem(matchContent);
+  const selectItem = (template) => {
+    setSelectedItem(template);
   }
 
   const selectCategory = (name) => {
@@ -23,6 +22,7 @@ export default function TemplateProvider({ children }) {
     const res = await getTemplates();
     setTemplates(res.data.templates);
     setCategories(res.data.categories);
+    selectItem(res.data.templates[0]);
   }
 
   const handleCreateTemplate = async(title, body, category) => {

@@ -9,7 +9,7 @@ export default function Item({ template, categoryName }) {
       className={`flex flex-col px-2 py-1 text-sm border-b border-gray-100 cursor-pointer hover:bg-gray-50 ${
         selectedItem?.id === template.id ? 'bg-gray-100' : ''
       }`}
-      onClick={() => selectItem(template.id)}
+      onClick={() => selectItem(template)}
     >
       <p className="text-base">{template.title}</p>
       <span className="text-xs text-blue-600 my-1">{categoryName}</span>
