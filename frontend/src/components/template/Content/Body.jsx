@@ -1,12 +1,21 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import StatusMessage from "./StatusMessage";
+import { TemplateContext } from "../../context/TemplateContext"
 
-export default function Body({title, setTitle, body, setBody, isUpdated}) {
-  const [ isEditing, setIsEditing ] = useState(false);
+export default function Body({title, setTitleInput, body, setBodyInput, titleInput, bodyInput}) {
+  const { isUpdated } = useContext(TemplateContext);
+
+  const isEditing = () => {
+    if (titleInput === title && bodyInput === body){
+      return false;
+    } else {
+      return true;
+    };
+  }
 
   const statusMessage = () => {
+    if (isEditing()) return <StatusMessage color="yellow">編集中...</StatusMessage>;
     if (isUpdated) return <StatusMessage color="green" >更新しました！</StatusMessage>;
-    if (isEditing) return <StatusMessage color="yellow">編集中...</StatusMessage>;
     return <StatusMessage color="blue">編集前</StatusMessage>;
   }
   
@@ -19,9 +28,8 @@ export default function Body({title, setTitle, body, setBody, isUpdated}) {
           type="text"
           className="input input-ghost w-full"
           placeholder="テンプレートのタイトル"
-          value={title}
-          onChange={e => {setTitle(e.target.value)
-                          setIsEditing(true)}}
+          value={titleInput}
+          onChange={e => setTitleInput(e.target.value)}
         />
       </div>     
       <div className="w-full content-end">
@@ -33,9 +41,8 @@ export default function Body({title, setTitle, body, setBody, isUpdated}) {
         <textarea
           className="textarea size-full"
           placeholder="テンプレートの内容を入力してください..."
-          value={body}
-          onChange={e => {setBody(e.target.value)
-                        setIsEditing(true)}}
+          value={bodyInput}
+          onChange={e => setBodyInput(e.target.value)}
         />
       </div>
     </div>

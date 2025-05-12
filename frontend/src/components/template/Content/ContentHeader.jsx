@@ -5,13 +5,14 @@ import { Link } from "react-router-dom";
 import Tooltip from "../../ToolTip";
 import Button from "../../Button";
 
-export default function ContentHeader({title, body, id, copy, clickDeleteButton, setIsUpdated}) {
-  const { handleUpdateTemplate } = useContext(TemplateContext);
+export default function ContentHeader({title, body, id, copy, clickDeleteButton}) {
+  const { handleUpdateTemplate, setIsUpdated, setIsEditing } = useContext(TemplateContext);
   const [showTooltip, setShowTooltip] = useState(false);
 
   const handleUpdate = () => {
     handleUpdateTemplate(body, title, id);
     setIsUpdated(true);
+    setIsEditing(false);
   }
 
   const handleCopy = () => {

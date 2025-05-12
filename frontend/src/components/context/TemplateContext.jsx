@@ -5,6 +5,8 @@ import { createTemplate, updateTemplate, deleteTemplate, getTemplates, deleteCat
 export const TemplateContext = createContext();
 
 export default function TemplateProvider({ children }) {
+  const [ isUpdated, setIsUpdated ] = useState(false);
+  const [ isEditing, setIsEditing ] = useState(false);
   const [ templates, setTemplates ] = useState([]);
   const [ categories, setCategories ] = useState([]);
   const [ selectedItem, setSelectedItem ] = useState(null);
@@ -57,7 +59,7 @@ export default function TemplateProvider({ children }) {
   }, [])
 
   return (
-    <TemplateContext.Provider value={{ templates, categories, selectItem, selectedItem, handleCreateTemplate, handleUpdateTemplate, handleDeleteTemplate, selectedCategory, selectCategory, handleUpdateCategoryName, handleDeleteCategory }}>
+    <TemplateContext.Provider value={{ isUpdated, setIsUpdated, isEditing, setIsEditing, templates, categories, selectItem, selectedItem, handleCreateTemplate, handleUpdateTemplate, handleDeleteTemplate, selectedCategory, selectCategory, handleUpdateCategoryName, handleDeleteCategory }}>
       {children}
     </TemplateContext.Provider>
   );
