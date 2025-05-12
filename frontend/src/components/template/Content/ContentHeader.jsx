@@ -2,7 +2,7 @@ import { Copy, Edit, Save, Trash2 } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
 import { TemplateContext } from "../../context/TemplateContext";
 import { Link } from "react-router-dom";
-import Tooltip from "../../ToolTip";
+import Tooltip from "../../Tooltip";
 import Button from "../../Button";
 
 export default function ContentHeader({title, body, id, copy, clickDeleteButton}) {
