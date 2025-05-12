@@ -3,6 +3,7 @@ import Header from "../Header";
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { TemplateContext } from "../context/TemplateContext";
+import Button from "../Button";
 
 export default function Create() {
   const [title, setTitle] = useState("");
@@ -48,9 +49,9 @@ export default function Create() {
           </div>
           <div className="flex justify-end gap-3 mt-5">
             <Link to="/template">
-              <button className="btn">キャンセル</button>
+              <Button>キャンセル</Button>
             </Link>
-            <button className="btn btn-primary" onClick={() => create()}>保存</button>
+            <Button className="btn-primary" onClick={() => create()}>保存</Button>
           </div>
         </div>
       </div>

@@ -1,39 +1,63 @@
 import { Copy, Edit, Save, Trash2 } from "lucide-react";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { TemplateContext } from "../../context/TemplateContext";
 import { Link } from "react-router-dom";
+import Tooltip from "../../Tooltip";
+import Button from "../../Button";
 
 export default function ContentHeader({title, body, id, copy, clickDeleteButton}) {
-  const { handleUpdateTemplate } = useContext(TemplateContext);
+  const { handleUpdateTemplate, setIsUpdated, setIsEditing } = useContext(TemplateContext);
+  const [showTooltip, setShowTooltip] = useState(false);
+
+  const handleUpdate = () => {
+    handleUpdateTemplate(body, title, id);
+    setIsUpdated(true);
+    setIsEditing(false);
+  }
+
+  const handleCopy = () => {
+    setShowTooltip(true);
+    copy();
+  }
+
+  useEffect(() => {
+    if (showTooltip) {
+      setTimeout(() => {
+        setShowTooltip(false);
+      }, 2000);
+    }
+  }, [showTooltip]);
+
 
   return(
     <div className="flex items-center justify-between border-b border-gray-200 p-3">
 
       <div className="flex gap-2">
         <Link to="/new">
-          <button className="btn btn-sm btn-primary gap-1">
+          <Button className="btn-primary btn-sm gap-1">
             <Edit className="h-4 w-4" />
             新規作成
-          </button>
+          </Button>
         </Link>
-        <button className="btn btn-sm btn-outline gap-1">
-          <Save className="h-4 w-4" onClick={() => handleUpdateTemplate(body, title, id)} />
+
+        <Button className="btn-outline btn-sm gap-1" onClick={() => handleUpdate()}>
+          <Save className="h-4 w-4" />
           更新
-        </button>
+        </Button>
       </div>
 
       <div className="flex gap-2">
-        <button className="btn btn-sm btn-outline gap-1" onClick={() => copy()}>
+        <Button className="btn-outline btn-sm gap-1 relative" onClick={() => handleCopy()}>
+          {showTooltip && <Tooltip />}
           <Copy className="h-4 w-4" />
           テンプレートをコピー
-        </button>
-        <button className="btn btn-sm btn-outline btn-error gap-1" onClick={() => clickDeleteButton()}>
+        </Button>
+
+        <Button className="btn-outline btn-sm btn-error gap-1" onClick={() => clickDeleteButton()}>
           <Trash2 className="h-4 w-4" />
           削除
-        </button>
+        </Button>
       </div>
-
     </div>
-
   )
 }

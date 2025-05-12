@@ -5,7 +5,7 @@ import { guestLogin } from "../../api/auth";
 import { useContext } from "react";
 import { AuthContext } from "../../App";
 import Cookies from "js-cookie";
-
+import Button from "../Button";
 
 export default function Home() {
   const { setIsSignedIn } = useContext(AuthContext);
@@ -33,13 +33,13 @@ export default function Home() {
       </div>
       <div className="flex gap-5 justify-center pb-10">
         <Link to="/signup">
-          <button className="btn btn-primary">アカウント作成</button>
+          <Button className="btn-primary">アカウント作成</Button>
         </Link>
         <form onSubmit={handleGuestLogin}>
-          <button type="submit" className="btn btn-secondary pl-4 pr-[12px]">
+          <Button type="submit" className="btn-secondary pl-4 pr-[12px]">
             <p>デモを見る</p>
             <CircleArrowRight className="size-6 px-[2px] ml-[2px]" strokeWidth={1.5}/>
-          </button>
+          </Button>
         </form>
       </div>
     </div>
