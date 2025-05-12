@@ -5,9 +5,14 @@ import { Link } from "react-router-dom";
 import Tooltip from "../../ToolTip";
 import Button from "../../Button";
 
-export default function ContentHeader({title, body, id, copy, clickDeleteButton}) {
+export default function ContentHeader({title, body, id, copy, clickDeleteButton, setIsUpdated}) {
   const { handleUpdateTemplate } = useContext(TemplateContext);
   const [showTooltip, setShowTooltip] = useState(false);
+
+  const handleUpdate = () => {
+    handleUpdateTemplate(body, title, id);
+    setIsUpdated(true);
+  }
 
   const handleCopy = () => {
     setShowTooltip(true);
@@ -34,23 +39,20 @@ export default function ContentHeader({title, body, id, copy, clickDeleteButton}
           </Button>
         </Link>
 
-        <Button className="btn-outline btn-sm gap-1"
-                onClick={() => handleUpdateTemplate(body, title, id)}>
+        <Button className="btn-outline btn-sm gap-1" onClick={() => handleUpdate()}>
           <Save className="h-4 w-4" />
           更新
         </Button>
       </div>
 
       <div className="flex gap-2">
-        <Button className="btn-outline btn-sm gap-1 relative" 
-                onClick={() => handleCopy()}>
+        <Button className="btn-outline btn-sm gap-1 relative" onClick={() => handleCopy()}>
           {showTooltip && <Tooltip />}
           <Copy className="h-4 w-4" />
           テンプレートをコピー
         </Button>
 
-        <Button className="btn-outline btn-sm btn-error gap-1"
-                onClick={() => clickDeleteButton()}>
+        <Button className="btn-outline btn-sm btn-error gap-1" onClick={() => clickDeleteButton()}>
           <Trash2 className="h-4 w-4" />
           削除
         </Button>

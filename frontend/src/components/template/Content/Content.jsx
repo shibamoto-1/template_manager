@@ -9,6 +9,7 @@ export default function Content() {
   const [ title, setTitle ] = useState("");
   const [ body, setBody ] = useState("");
   const [ id, setId ] = useState(null);
+  const [ isUpdated, setIsUpdated ] = useState(false);
 
   const copy = () => {
     navigator.clipboard.writeText(body);
@@ -31,9 +32,9 @@ export default function Content() {
 
   return(
     <div>
-      <ContentHeader title={title} body={body} id={id} copy={copy} clickDeleteButton={clickDeleteButton} />
+      <ContentHeader title={title} body={body} id={id} copy={copy} clickDeleteButton={clickDeleteButton} setIsUpdated={setIsUpdated} />
       <div className="flex flex-1">
-        <Body title={title} setTitle={setTitle} body={body} setBody={setBody}/>
+        <Body title={title} setTitle={setTitle} body={body} setBody={setBody} isUpdated={isUpdated} />
         <Preview body={body} />
       </div>
     </div>
