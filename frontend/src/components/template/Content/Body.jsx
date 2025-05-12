@@ -1,12 +1,13 @@
 import { useState } from "react"
+import StatusMessage from "./StatusMessage";
 
 export default function Body({title, setTitle, body, setBody, isUpdated}) {
   const [ isEditing, setIsEditing ] = useState(false);
 
   const statusMessage = () => {
-    if (isUpdated) return <p>編集しました</p>;
-    if (isEditing) return <p>編集中です</p>;
-    return <p>編集前です。</p>;
+    if (isUpdated) return <StatusMessage color="green" >更新しました！</StatusMessage>;
+    if (isEditing) return <StatusMessage color="yellow">編集中...</StatusMessage>;
+    return <StatusMessage color="blue">編集前</StatusMessage>;
   }
   
 
@@ -23,7 +24,7 @@ export default function Body({title, setTitle, body, setBody, isUpdated}) {
                           setIsEditing(true)}}
         />
       </div>     
-      <div>
+      <div className="w-full content-end">
         {statusMessage()}
       </div>
     </div>
