@@ -10,8 +10,8 @@ export default function TemplateProvider({ children }) {
   const [ selectedItem, setSelectedItem ] = useState(null);
   const [ selectedCategory, setSelectedCategory ] = useState(null);
 
-  const selectItem = (title) => {
-    const matchContent =  templates.find((template) => template.title === title);
+  const selectItem = (id) => {
+    const matchContent =  templates.find((template) => template.id === id);
     setSelectedItem(matchContent);
   }
 
