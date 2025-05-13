@@ -10,7 +10,11 @@ export default function ContentHeader({title, body, id, copy, clickDeleteButton}
   const { handleUpdateTemplate, setIsUpdated, setIsEditing } = useContext(TemplateContext);
   const [showTooltip, setShowTooltip] = useState(false);
   const modalRef = useRef();
-;
+
+  const deleteButton = () => {
+    clickDeleteButton(modalRef);
+  }
+
   const handleUpdate = () => {
     handleUpdateTemplate(body, title, id);
     setIsUpdated(true);
@@ -69,8 +73,12 @@ export default function ContentHeader({title, body, id, copy, clickDeleteButton}
         </Button>
       </div>
 
-      <DeleteModal modalRef={modalRef} handleCloseModal={handleCloseModal} clickDeleteButton={clickDeleteButton}/>
+      <DeleteModal
+        modalRef={modalRef}
+        handleCloseModal={handleCloseModal}
+        onConfirm={deleteButton}
+        title="テンプレートを削除しますか？"
+        />
     </div>
   )
 }
-// onClick={() => clickDeleteButton(

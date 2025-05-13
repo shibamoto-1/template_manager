@@ -21,7 +21,7 @@ export default function Content() {
     handleDeleteTemplate(id);
     setTitle("");
     setBody("");
-    modalRef.current.close();
+    modalRef?.current.close();
   }
 
   useEffect(() => {

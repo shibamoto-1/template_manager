@@ -10,10 +10,10 @@ export default function Item({ template, categoryName }) {
         selectedItem?.id === template.id ? 'bg-gray-100' : ''
       }`}
       onClick={() => {selectItem(template)
-                      setIsUpdated(false)}}
-    >
+        setIsUpdated(false)}}
+        >
       <p className="text-base">{template.title}</p>
       <span className="text-xs text-blue-600 my-1">{categoryName}</span>
-    </li>
+    </li>  
   )
 }
