@@ -38,7 +38,7 @@ export default function Content() {
       <ContentHeader title={titleInput} body={bodyInput} id={id} copy={copy} clickDeleteButton={clickDeleteButton} />
       <div className="flex flex-1">
         <Body title={title} setTitleInput={setTitleInput} body={body} setBodyInput={setBodyInput} titleInput={titleInput} bodyInput={bodyInput} />
-        <Preview body={body} />
+        <Preview bodyInput={bodyInput} />
       </div>
     </div>
   )
