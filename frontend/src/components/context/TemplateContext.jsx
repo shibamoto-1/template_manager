@@ -38,7 +38,6 @@ export default function TemplateProvider({ children }) {
   }
   
   const handleDeleteTemplate = async(id) => {
-    if (!window.confirm(`本当に削除しますか？`)) return;
     await deleteTemplate(id);
     fetch();
   }
@@ -49,7 +48,6 @@ export default function TemplateProvider({ children }) {
   }
 
   const handleDeleteCategory = async(id) => {
-    if (!window.confirm(`本当に削除しますか？`)) return;
     await deleteCategory(id);
     fetch();
   }

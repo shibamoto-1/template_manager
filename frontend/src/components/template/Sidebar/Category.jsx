@@ -1,13 +1,28 @@
 import { EllipsisVertical } from 'lucide-react';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { TemplateContext } from '../../context/TemplateContext';
+import DeleteModal from "../../DeleteModal";
+
 
 export default function Category({ templateSum, category = null }) {
   const { selectCategory, selectedCategory, handleUpdateCategoryName, handleDeleteCategory } = useContext(TemplateContext);
   const [ isEditName, setIsEditName ] = useState(false);
   const [ categoryName, setCategoryName ] = useState(category ? category.name : "全カテゴリ");
-
+  const modalRef = useRef();
   const inputRef = useRef(null);
+
+  const handleOpenModal = () => {
+    modalRef.current.showModal();
+  }
+
+  const handleCloseModal = () => {
+    modalRef.current.close();
+  }
+
+  const deleteCategory = () => {
+    handleDeleteCategory(category.id);
+    modalRef.current.close();
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -61,11 +76,19 @@ export default function Category({ templateSum, category = null }) {
               <p onClick={() => setIsEditName(true)} >カテゴリ名を編集</p>
             </li>
             <li>
-              <p className="text-red-500" onClick={() => handleDeleteCategory(category.id)}>カテゴリを削除</p>
+              <p className="text-red-500" onClick={() => handleOpenModal()}>カテゴリを削除</p>
             </li>
           </ul>
         </div>
       }
+
+      <DeleteModal
+        modalRef={modalRef}
+        title="カテゴリを削除しますか？"
+        message={`残りのテンプレート数は${templateSum}個です`}
+        onConfirm={deleteCategory}
+        handleCloseModal={handleCloseModal}
+      />
     </li>
   )
 }

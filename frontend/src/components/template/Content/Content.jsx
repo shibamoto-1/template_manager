@@ -17,10 +17,11 @@ export default function Content() {
     navigator.clipboard.writeText(body);
   }
 
-  const clickDeleteButton = () => {
+  const clickDeleteButton = (modalRef) => {
     handleDeleteTemplate(id);
     setTitle("");
     setBody("");
+    modalRef?.current.close();
   }
 
   useEffect(() => {
