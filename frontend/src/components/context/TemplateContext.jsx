@@ -38,7 +38,6 @@ export default function TemplateProvider({ children }) {
   }
   
   const handleDeleteTemplate = async(id) => {
-    if (!window.confirm(`本当に削除しますか？`)) return;
     await deleteTemplate(id);
     fetch();
   }

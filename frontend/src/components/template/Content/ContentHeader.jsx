@@ -1,14 +1,16 @@
 import { Copy, Edit, Save, Trash2 } from "lucide-react";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { TemplateContext } from "../../context/TemplateContext";
 import { Link } from "react-router-dom";
 import Tooltip from "../../Tooltip";
 import Button from "../../Button";
+import DeleteModal from "../../DeleteModal";
 
 export default function ContentHeader({title, body, id, copy, clickDeleteButton}) {
   const { handleUpdateTemplate, setIsUpdated, setIsEditing } = useContext(TemplateContext);
   const [showTooltip, setShowTooltip] = useState(false);
-
+  const modalRef = useRef();
+;
   const handleUpdate = () => {
     handleUpdateTemplate(body, title, id);
     setIsUpdated(true);
@@ -28,6 +30,13 @@ export default function ContentHeader({title, body, id, copy, clickDeleteButton}
     }
   }, [showTooltip]);
 
+  const handleOpenModal = () => {
+    modalRef.current.showModal();
+  }
+
+  const handleCloseModal = () => {
+    modalRef.current.close();
+  }
 
   return(
     <div className="flex items-center justify-between border-b border-gray-200 p-3">
@@ -53,11 +62,15 @@ export default function ContentHeader({title, body, id, copy, clickDeleteButton}
           テンプレートをコピー
         </Button>
 
-        <Button className="btn-outline btn-sm btn-error gap-1" onClick={() => clickDeleteButton()}>
+        <Button className="btn-outline btn-sm btn-error gap-1" 
+          onClick={()=>handleOpenModal()}>
           <Trash2 className="h-4 w-4" />
           削除
         </Button>
       </div>
+
+      <DeleteModal modalRef={modalRef} handleCloseModal={handleCloseModal} clickDeleteButton={clickDeleteButton}/>
     </div>
   )
 }
+// onClick={() => clickDeleteButton(
