@@ -1,6 +1,6 @@
 import Markdown from "react-markdown";
 
-export default function Preview({body}) {
+export default function Preview({bodyInput}) {
 
   return(
     <div className="flex-1 p-4">
@@ -9,7 +9,7 @@ export default function Preview({body}) {
       
       <div className="w-full h-full border border-gray-300 rounded px-5 pt-2 pb-20">
         <div className="prose prose-sm">
-          <Markdown>{body}</Markdown>
+          <Markdown>{bodyInput}</Markdown>
         </div>
       </div>
     </div>
