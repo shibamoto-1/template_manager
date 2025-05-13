@@ -1,5 +1,7 @@
 import { useState } from "react";
 import Markdown from "react-markdown";
+import remarkBreaks from 'remark-breaks';
+import remarkGfm from 'remark-gfm'
 
 export default function Preview({bodyInput}) {
   const [ isMarkdown, setIsMarkdown ] = useState(true);
@@ -25,7 +27,13 @@ export default function Preview({bodyInput}) {
       
       <div className="w-full h-full border border-gray-300 rounded px-5 pt-2 pb-20">
         <div className="prose prose-sm">
-          {isMarkdown ? <Markdown>{bodyInput}</Markdown> : bodyInput}
+          {isMarkdown ? 
+            <Markdown
+              remarkPlugins={[remarkBreaks, remarkGfm]}>
+              {bodyInput}
+            </Markdown>
+            :
+            bodyInput}
         </div>
       </div>
     </div>
