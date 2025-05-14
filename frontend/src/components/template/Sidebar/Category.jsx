@@ -33,7 +33,7 @@ export default function Category({ templateSum, category = null }) {
     setIsEditName(false);
     setCategoryName(category.name);
   }
-
+  
   useEffect(() =>  {
     if (isEditName) {
     inputRef.current.focus();
