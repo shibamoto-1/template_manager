@@ -7,22 +7,20 @@ import Item from "./Item";
 
 export default function ItemBar() {
   const { templates, categories, selectedCategory } = useContext(TemplateContext);
-  const [filteredTemplates, setFilteredTemplates] = useState(templates);
 
-  useEffect(() => {
+  const filteredTemplates =  () => {
     if (selectedCategory === null) {
-      setFilteredTemplates(templates);
+      return templates;
     } else {
-      setFilteredTemplates(templates
-                          .filter(template => template.category_id === selectedCategory.id));
+      return templates.filter(template => template.category_id === selectedCategory.id);
     }
-  }, [templates, selectedCategory]);
+  }
 
   return (
     <div className="max-h-1/3 px-4 py-2">
       <h3 className="text-xs font-semibold text-gray-500">テンプレート一覧</h3>
       <ul className="mt-2 space-y-1">
-        {filteredTemplates.map((template) => {
+        {filteredTemplates().map((template) => {
           const category = categories.find((category) => category.id === template.category_id)
           return <Item key={template.id} template={template} categoryName={category.name} />;
         })}
