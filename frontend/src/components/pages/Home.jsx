@@ -61,7 +61,7 @@ export default function Home() {
       </div>
     </div>
 
-    <div className="border">
+    {/* <div className="border">
       <div className="snap-x overflow-x-auto">
         <div className="snap-center">
           <p>おはよう</p>
@@ -73,7 +73,7 @@ export default function Home() {
           <p>おはよう</p>
         </div>
       </div>
-    </div>
+    </div> */}
 
 
   </div>
