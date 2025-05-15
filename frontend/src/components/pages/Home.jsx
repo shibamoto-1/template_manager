@@ -61,14 +61,20 @@ export default function Home() {
       </div>
     </div>
 
-    {/* <div>
-      スクショカルーセル
+    {/* <div className="border">
+      <div className="snap-x overflow-x-auto">
+        <div className="snap-center">
+          <p>おはよう</p>
+        </div>
+        <div className="snap-center">
+          <p>おはよう</p>
+        </div>
+        <div className="snap-center">
+          <p>おはよう</p>
+        </div>
+      </div>
     </div> */}
 
-    {/* <div className="w-full my-7 flex gap-3 justify-center">
-      <button className="btn">アカウント作成</button>
-      <button className="btn">デモを見る</button>
-    </div> */}
 
   </div>
   )
