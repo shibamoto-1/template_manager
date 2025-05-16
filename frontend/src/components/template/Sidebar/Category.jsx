@@ -1,11 +1,13 @@
 import { EllipsisVertical } from 'lucide-react';
 import { useContext, useEffect, useRef, useState } from 'react';
-import { TemplateContext } from '../../context/TemplateContext';
+import { TemplateAPIContext, TemplateContext, TemplateUpdateContext } from '../../context/TemplateContext';
 import DeleteModal from "../../DeleteModal";
 
 
 export default function Category({ templateSum, category = null }) {
-  const { selectCategory, selectedCategory, handleUpdateCategoryName, handleDeleteCategory } = useContext(TemplateContext);
+  const { selectCategory } = useContext(TemplateContext);
+  const { selectedCategory } = useContext(TemplateUpdateContext);
+  const { handleUpdateCategoryName, handleDeleteCategory } = useContext(TemplateAPIContext);
   const [ isEditName, setIsEditName ] = useState(false);
   const [ categoryName, setCategoryName ] = useState(category ? category.name : "全カテゴリ");
   const modalRef = useRef();

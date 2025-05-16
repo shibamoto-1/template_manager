@@ -2,14 +2,15 @@ import ContentHeader from "./ContentHeader";
 import Body from "./Body";
 import Preview from "./Preview";
 import { useContext, useEffect, useState } from "react";
-import { TemplateContext } from "../../context/TemplateContext";
+import { TemplateAPIContext, TemplateContext } from "../../context/TemplateContext";
 import Button from "../../Button";
 import { Edit } from "lucide-react";
 import { Link } from "react-router-dom";
 
 
 export default function Content({ isEmpty }) {
-  const { selectedItem, handleDeleteTemplate } = useContext(TemplateContext);
+  const { selectedItem } = useContext(TemplateContext);
+  const { handleDeleteTemplate } = useContext(TemplateAPIContext);
   const [ title, setTitle ] = useState("");
   const [ body, setBody ] = useState("");
   const [ id, setId ] = useState(null);

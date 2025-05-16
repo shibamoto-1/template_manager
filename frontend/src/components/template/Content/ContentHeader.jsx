@@ -1,13 +1,14 @@
 import { Copy, Edit, Save, Trash2 } from "lucide-react";
 import { useContext, useEffect, useRef, useState } from "react";
-import { TemplateContext } from "../../context/TemplateContext";
+import { TemplateAPIContext, TemplateContext, TemplateUpdateContext } from "../../context/TemplateContext";
 import { Link } from "react-router-dom";
 import Tooltip from "../../Tooltip";
 import Button from "../../Button";
 import DeleteModal from "../../DeleteModal";
 
 export default function ContentHeader({title, body, id, copy, clickDeleteButton}) {
-  const { handleUpdateTemplate, setIsUpdated, setIsEditing } = useContext(TemplateContext);
+  const { setIsUpdated, setIsEditing } = useContext(TemplateUpdateContext);
+  const { handleUpdateTemplate } = useContext(TemplateAPIContext);
   const [showTooltip, setShowTooltip] = useState(false);
   const modalRef = useRef();
 

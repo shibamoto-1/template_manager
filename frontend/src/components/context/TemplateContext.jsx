@@ -3,6 +3,8 @@ import { createContext, useEffect, useState } from 'react';
 import { createTemplate, updateTemplate, deleteTemplate, getTemplates, deleteCategory, updateCategoryName } from '../../api/template';
 
 export const TemplateContext = createContext();
+export const TemplateUpdateContext = createContext();
+export const TemplateAPIContext = createContext();
 
 export default function TemplateProvider({ children }) {
   const [ isUpdated, setIsUpdated ] = useState(false);
@@ -57,8 +59,12 @@ export default function TemplateProvider({ children }) {
   }, [])
 
   return (
-    <TemplateContext.Provider value={{ isUpdated, setIsUpdated, isEditing, setIsEditing, templates, categories, selectItem, selectedItem, handleCreateTemplate, handleUpdateTemplate, handleDeleteTemplate, selectedCategory, selectCategory, handleUpdateCategoryName, handleDeleteCategory }}>
-      {children}
+    <TemplateContext.Provider value={{isUpdated, isEditing, templates, categories, selectedItem, selectedCategory }}>
+      <TemplateUpdateContext value={{setIsUpdated, setIsEditing, selectItem, selectCategory}}>
+          <TemplateAPIContext value={{handleCreateTemplate, handleUpdateTemplate, handleDeleteTemplate, handleUpdateCategoryName, handleDeleteCategory}}>
+            {children}
+          </TemplateAPIContext>
+      </TemplateUpdateContext>
     </TemplateContext.Provider>
   );
 }
