@@ -4,8 +4,7 @@
 テンプレートを作成、管理するwebアプリケーションです。</br>
 カテゴリを紐づけたり、マークダウン記法を使用することもできます。
 ### URL
-https://template-manager-eta.vercel.app/ </br>
-（独自ドメインを予定しています。）
+https://www.temp-li.com/
 
 |トップページ|テンプレート作成画面|
 |---|---|
@@ -32,6 +31,21 @@ https://template-manager-eta.vercel.app/ </br>
 - カテゴリを使ったテンプレートのフィルター機能
 - マークダウン記法の適用
 - ボタンを押下してテンプレートをコピー
+
+## 環境構築
+> 構築方法
+#### バックエンド
+```
+cd backend/
+bundle install
+rails db:migrate
+```
+#### フロントエンド
+```
+cd frontend/
+npm install
+npm run dev
+```
 
 ## 工夫ポイント
 1. ボタン押下時のフィードバックや、編集中か更新したかのステータス表示といった、ユーザーの使用感を意識して開発を進めました。
