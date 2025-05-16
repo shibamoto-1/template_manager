@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import Button from "../Button";
 
 export const SignIn = () => {
-  const { register, handleSubmit, watch, formState: { errors } } = useForm({mode: "onChange"});
+  const { register, handleSubmit, formState: { errors } } = useForm({mode: "onChange"});
   const { setIsSignedIn } = useContext(AuthContext);
   const navigate = useNavigate();
 

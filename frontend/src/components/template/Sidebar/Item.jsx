@@ -1,8 +1,9 @@
 import { useContext } from "react"
-import { TemplateContext } from "../../context/TemplateContext"
+import { TemplateContext, TemplateUpdateContext } from "../../context/TemplateContext"
 
 export default function Item({ template, categoryName }) {
-  const { selectItem, selectedItem, setIsUpdated } = useContext(TemplateContext);
+  const { selectedItem } = useContext(TemplateContext);
+  const { selectItem, setIsUpdated } = useContext(TemplateUpdateContext);
   return (
     <li
       key={template.id}

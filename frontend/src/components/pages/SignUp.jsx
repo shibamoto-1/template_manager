@@ -8,7 +8,7 @@ import Button from "../Button";
 
 
 export const SignUp = () => {
-  const { register, handleSubmit, watch, formState: { errors } } = useForm({mode: "onChange"});
+  const { register, handleSubmit, formState: { errors } } = useForm({mode: "onChange"});
   const { setIsSignedIn } = useContext(AuthContext);
   const navigate = useNavigate();
 

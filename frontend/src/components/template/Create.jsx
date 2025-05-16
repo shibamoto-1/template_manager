@@ -2,7 +2,7 @@ import Markdown from "react-markdown";
 import Header from "../Header";
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { TemplateContext } from "../context/TemplateContext";
+import { TemplateAPIContext } from "../context/TemplateContext";
 import Button from "../Button";
 import { useForm } from "react-hook-form";
 import remarkBreaks from 'remark-breaks';
@@ -11,7 +11,7 @@ import remarkGfm from 'remark-gfm'
 
 export default function Create() {
   const { register, handleSubmit, watch, formState: { errors } } = useForm({ mode: "onBlur" })
-  const { handleCreateTemplate } = useContext(TemplateContext);
+  const { handleCreateTemplate } = useContext(TemplateAPIContext);
   const navigate = useNavigate();
 
   const bodyValue = watch("body");
