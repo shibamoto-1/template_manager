@@ -33,19 +33,25 @@ https://www.temp-li.com/
 - ボタンを押下してテンプレートをコピー
 
 ## 環境構築
-> 構築方法
-#### バックエンド
+<details>
+
+<summary>構築方法</summary>
+
+#### バックエン
 ```
 cd backend/
 bundle install
 rails db:migrate
 ```
+
 #### フロントエンド
 ```
 cd frontend/
 npm install
 npm run dev
 ```
+
+</details>
 
 ## 工夫ポイント
 1. ボタン押下時のフィードバックや、編集中か更新したかのステータス表示といった、ユーザーの使用感を意識して開発を進めました。
