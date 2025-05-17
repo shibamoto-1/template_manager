@@ -3,7 +3,7 @@ import Markdown from "react-markdown";
 import remarkBreaks from 'remark-breaks';
 import remarkGfm from 'remark-gfm'
 
-export default function Preview({bodyInput}) {
+export default function Preview({body}) {
   const [ isMarkdown, setIsMarkdown ] = useState(true);
 
   return(
@@ -30,10 +30,10 @@ export default function Preview({bodyInput}) {
           {isMarkdown ? 
             <Markdown
               remarkPlugins={[remarkBreaks, remarkGfm]}>
-              {bodyInput}
+              {body}
             </Markdown>
             :
-            bodyInput}
+            body}
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import Sidebar from './Sidebar/Sidebar';
-import Content from './Content/Content';
+import { Content, NoContent } from './Content/Content';
 import Header from '../Header';
 import { useContext } from 'react';
 import { TemplateContext } from '../context/TemplateContext';
@@ -14,7 +14,7 @@ export default function Template() {
       <div className="flex flex-1">
         <Sidebar />
         <div className="flex-1" >
-          <Content isEmpty={isEmpty} />
+          {!isEmpty ? <Content  /> : <NoContent />}
         </div>
       </div>
     </div>

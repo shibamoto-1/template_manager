@@ -7,15 +7,13 @@ export const TemplateUpdateContext = createContext();
 export const TemplateAPIContext = createContext();
 
 export default function TemplateProvider({ children }) {
-  const [ isUpdated, setIsUpdated ] = useState(false);
-  const [ isEditing, setIsEditing ] = useState(false);
   const [ templates, setTemplates ] = useState([]);
   const [ categories, setCategories ] = useState([]);
-  const [ selectedItem, setSelectedItem ] = useState(null);
+  const [ selectedTemplate, setSelectedTemplate ] = useState(null);
   const [ selectedCategory, setSelectedCategory ] = useState(null);
 
-  const selectItem = (template) => {
-    setSelectedItem(template);
+  const selectTemplate = (template) => {
+    setSelectedTemplate(template);
   }
 
   const selectCategory = (name) => {
@@ -26,7 +24,7 @@ export default function TemplateProvider({ children }) {
     const res = await getTemplates();
     setTemplates(res.data.templates);
     setCategories(res.data.categories);
-    selectItem(res.data.templates[0]);
+    selectTemplate(res.data.templates[0]);
   }
 
   const handleCreateTemplate = async(title, body, category) => {
@@ -59,8 +57,8 @@ export default function TemplateProvider({ children }) {
   }, [])
 
   return (
-    <TemplateContext.Provider value={{isUpdated, isEditing, templates, categories, selectedItem, selectedCategory }}>
-      <TemplateUpdateContext value={{setIsUpdated, setIsEditing, selectItem, selectCategory}}>
+    <TemplateContext.Provider value={{templates, categories, selectedTemplate, selectedCategory }}>
+      <TemplateUpdateContext value={{selectTemplate, selectCategory}}>
           <TemplateAPIContext value={{handleCreateTemplate, handleUpdateTemplate, handleDeleteTemplate, handleUpdateCategoryName, handleDeleteCategory}}>
             {children}
           </TemplateAPIContext>

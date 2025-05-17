@@ -5,8 +5,8 @@ import DeleteModal from "../../DeleteModal";
 
 
 export default function Category({ templateSum, category = null }) {
-  const { selectCategory } = useContext(TemplateContext);
-  const { selectedCategory } = useContext(TemplateUpdateContext);
+  const { selectedCategory } = useContext(TemplateContext);
+  const { selectCategory } = useContext(TemplateUpdateContext);
   const { handleUpdateCategoryName, handleDeleteCategory } = useContext(TemplateAPIContext);
   const [ isEditName, setIsEditName ] = useState(false);
   const [ categoryName, setCategoryName ] = useState(category ? category.name : "全カテゴリ");
