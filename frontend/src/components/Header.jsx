@@ -13,7 +13,9 @@ export default function Header() {
   const handleSignOutClick = async() => {
     try {
       const res = await signOut();
-
+      Cookies.remove("_access_token")
+      Cookies.remove("_client")
+      Cookies.remove("_uid")
       navigate("/signin");
     } catch (error) {
       console.log(error);
