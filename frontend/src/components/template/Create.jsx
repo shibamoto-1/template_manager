@@ -2,7 +2,7 @@ import Markdown from "react-markdown";
 import Header from "../Header";
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { TemplateAPIContext } from "../context/TemplateContext";
+import { TemplateAPIContext, TemplateContext } from "../context/TemplateContext";
 import Button from "../Button";
 import { useForm } from "react-hook-form";
 import remarkBreaks from 'remark-breaks';
@@ -10,7 +10,8 @@ import remarkGfm from 'remark-gfm'
 
 
 export default function Create() {
-  const { register, handleSubmit, watch, formState: { errors } } = useForm({ mode: "onBlur" })
+  const { register, handleSubmit, watch, formState: { errors } } = useForm({ mode: "onBlur" });
+  const { categories } = useContext(TemplateContext);
   const { handleCreateTemplate } = useContext(TemplateAPIContext);
   const navigate = useNavigate();
 
@@ -33,6 +34,7 @@ export default function Create() {
             <label htmlFor="title">テンプレート名</label>
             <input
               type="text"
+              id="title"
               placeholder="テンプレート名を入力"
               className="input"
               {...register("title", {
@@ -60,12 +62,17 @@ export default function Create() {
             <label htmlFor="category">カテゴリー</label>
             <input
               type="text"
+              id="category"
+              list="list"
               placeholder="カテゴリ名を入力"
               className="input"
               {...register("category", {
                 required: "カテゴリ名は必須です"
               })}
               />
+            <datalist id="list">
+              {categories.map(category => <option key={category.id} value={category.name} />)}
+            </datalist>
             <p className="text-red-400">{errors?.category?.message}</p>
 
           </div>

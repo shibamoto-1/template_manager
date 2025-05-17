@@ -14,7 +14,7 @@ export default function Template() {
       <div className="flex flex-1">
         <Sidebar />
         <div className="flex-1" >
-          {!isEmpty ? <Content  /> : <NoContent />}
+          {isEmpty ? <NoContent /> : <Content /> }
         </div>
       </div>
     </div>
