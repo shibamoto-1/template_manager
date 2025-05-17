@@ -64,6 +64,7 @@ export default function Create() {
               type="text"
               id="category"
               list="list"
+              autoComplete="off"
               placeholder="カテゴリ名を入力"
               className="input"
               {...register("category", {
