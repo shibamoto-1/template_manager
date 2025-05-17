@@ -1,25 +1,16 @@
 import { Copy, Edit, Save, Trash2 } from "lucide-react";
-import { useContext, useEffect, useRef, useState } from "react";
-import { TemplateAPIContext, TemplateContext, TemplateUpdateContext } from "../../context/TemplateContext";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Tooltip from "../../Tooltip";
 import Button from "../../Button";
 import DeleteModal from "../../DeleteModal";
 
-export default function ContentHeader({title, body, id, copy, clickDeleteButton}) {
-  const { setIsUpdated, setIsEditing } = useContext(TemplateUpdateContext);
-  const { handleUpdateTemplate } = useContext(TemplateAPIContext);
+export default function ContentHeader({handleUpdate, handleDelete, copy}) {
   const [showTooltip, setShowTooltip] = useState(false);
   const modalRef = useRef();
 
   const deleteButton = () => {
-    clickDeleteButton(modalRef);
-  }
-
-  const handleUpdate = () => {
-    handleUpdateTemplate(body, title, id);
-    setIsUpdated(true);
-    setIsEditing(false);
+    handleDelete(modalRef);
   }
 
   const handleCopy = () => {
@@ -54,7 +45,7 @@ export default function ContentHeader({title, body, id, copy, clickDeleteButton}
           </Button>
         </Link>
 
-        <Button className="btn-outline btn-sm gap-1" onClick={() => handleUpdate()}>
+        <Button className="btn-outline btn-sm gap-1" onClick={handleUpdate}>
           <Save className="h-4 w-4" />
           更新
         </Button>
