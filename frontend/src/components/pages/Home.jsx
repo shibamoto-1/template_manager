@@ -7,7 +7,9 @@ import { AuthContext } from "../../App";
 import Cookies from "js-cookie";
 import Button from "../Button";
 import Logo from "../../assets/logo.svg";
+import AA from "../../assets/AA.png";
 import templateCreate from "../../assets/templateCreate.gif";
+import copyAndUpdate from "../../assets/copy_update.gif";
 
 export default function Home() {
   const { isSignedIn, setIsSignedIn } = useContext(AuthContext);
@@ -55,7 +57,7 @@ export default function Home() {
             そんな煩わしさをちょっとでも解消するべく<span><img src={Logo} alt="タイトル" className="inline px-2"/></span>は生まれました。
           </p>
       </div>
-      <div className="flex flex-col gap-1 justify-center pb-10">
+      <div className="pb-10">
         {isSignedIn ?
           <Link to="/template">
             <Button className="btn-primary">
@@ -110,7 +112,7 @@ export default function Home() {
 
         <div className="shrink-0 card bg-base-100">
           <figure className="px-10 pt-10">
-            <img src={templateCreate} alt="画像" className="h-100" />
+            <img src={copyAndUpdate} alt="画像" className="h-100" />
           </figure>
           <div className="card-body items-center text-center">
             <p className="text-lg">ボタンを押すと中身をコピー。<br/>中身を書き換えても元のテンプレートは変更されません。</p>            
@@ -119,7 +121,7 @@ export default function Home() {
 
         <div className="shrink-0 card bg-base-100">
           <figure className="px-10 pt-10">
-            <img src={templateCreate} alt="画像" className="h-100" />
+            <img src={AA} alt="画像" className="h-100" />
           </figure>
           <div className="card-body items-center text-center">
             <p className="text-lg">（テンプレート以外でも...？）</p>
