@@ -14,12 +14,9 @@ export default function Content({ isEmpty }) {
   const [ title, setTitle ] = useState("");
   const [ body, setBody ] = useState("");
   const [ id, setId ] = useState(null);
-  const [ titleInput, setTitleInput ] = useState("");
-  const [ bodyInput, setBodyInput ] = useState("");
-
 
   const copy = () => {
-    navigator.clipboard.writeText(body);
+    navigator.clipboard.writeText(selectedItem.body);
   }
 
   const clickDeleteButton = (modalRef) => {
@@ -33,8 +30,6 @@ export default function Content({ isEmpty }) {
     if(selectedItem){
     setTitle(selectedItem.title);
     setBody(selectedItem.body);
-    setTitleInput(selectedItem.title);
-    setBodyInput(selectedItem.body);
     setId(selectedItem.id);
     }
   }, [selectedItem]);
@@ -57,10 +52,10 @@ export default function Content({ isEmpty }) {
 
   return(
     <div>
-      <ContentHeader title={titleInput} body={bodyInput} id={id} copy={copy} clickDeleteButton={clickDeleteButton} />
+      <ContentHeader title={title} body={body} id={id} copy={copy} clickDeleteButton={clickDeleteButton} />
       <div className="flex flex-1">
-        <Body title={title} setTitleInput={setTitleInput} body={body} setBodyInput={setBodyInput} titleInput={titleInput} bodyInput={bodyInput} />
-        <Preview bodyInput={bodyInput} />
+        <Body title={title} setTitle={setTitle} body={body} setBody={setBody} />
+        <Preview body={body} />
       </div>
     </div>
   )

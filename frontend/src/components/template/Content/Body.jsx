@@ -2,22 +2,22 @@ import { useContext } from "react"
 import StatusMessage from "./StatusMessage";
 import { TemplateContext } from "../../context/TemplateContext"
 
-export default function Body({title, setTitleInput, body, setBodyInput, titleInput, bodyInput}) {
+export default function Body({title, setTitle, body, setBody}) {
   const { isUpdated } = useContext(TemplateContext);
 
-  const isEditing = () => {
-    if (titleInput === title && bodyInput === body){
-      return false;
-    } else {
-      return true;
-    };
-  }
+  // const isEditing = () => {
+  //   if (titleInput === title && bodyInput === body){
+  //     return false;
+  //   } else {
+  //     return true;
+  //   };
+  // }
 
-  const statusMessage = () => {
-    if (isEditing()) return <StatusMessage color="yellow">編集中...</StatusMessage>;
-    if (isUpdated) return <StatusMessage color="green" >更新しました！</StatusMessage>;
-    return <StatusMessage color="blue">編集前</StatusMessage>;
-  }
+  // const statusMessage = () => {
+  //   if (isEditing()) return <StatusMessage color="yellow">編集中...</StatusMessage>;
+  //   if (isUpdated) return <StatusMessage color="green" >更新しました！</StatusMessage>;
+  //   return <StatusMessage color="blue">編集前</StatusMessage>;
+  // }
   
 
   return(
@@ -28,21 +28,21 @@ export default function Body({title, setTitleInput, body, setBodyInput, titleInp
           type="text"
           className="input input-ghost w-full"
           placeholder="テンプレートのタイトル"
-          value={titleInput}
-          onChange={e => setTitleInput(e.target.value)}
+          value={title}
+          onChange={e => setTitle(e.target.value)}
         />
       </div>     
-      <div className="w-full content-end">
+      {/* <div className="w-full content-end">
         {statusMessage()}
-      </div>
+      </div> */}
     </div>
       
       <div className="w-full h-full pb-20">
         <textarea
           className="textarea size-full"
           placeholder="テンプレートの内容を入力してください..."
-          value={bodyInput}
-          onChange={e => setBodyInput(e.target.value)}
+          value={body}
+          onChange={e => setBody(e.target.value)}
         />
       </div>
     </div>
