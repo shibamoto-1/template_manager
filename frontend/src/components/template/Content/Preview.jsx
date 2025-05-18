@@ -33,7 +33,8 @@ export default function Preview({body}) {
               {body}
             </Markdown>
             :
-            body}
+            <p className="whitespace-pre-wrap">{body}</p>
+          }
         </div>
       </div>
     </div>
