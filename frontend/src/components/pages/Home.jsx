@@ -61,7 +61,7 @@ export default function Home() {
         {isSignedIn ?
           <Link to="/template">
             <Button className="btn-primary">
-              <p>管理場に戻る</p>
+              <p>サービスに戻る</p>
               <CircleArrowRight className="size-6 px-[2px] ml-[4px]" strokeWidth={1.5}/>
 
             </Button>

@@ -24,9 +24,9 @@ export default function Header() {
 
   return(
     <header className="p-4 flex justify-between items-center border-b border-gray-200">
-      <h1 className="">
-        <img src={Logo} />
-      </h1>
+      <Link to="/">
+        <img src={Logo} alt="ロゴ" />
+      </Link>
 
       {isSignedIn && !isGuest ? (
         <nav onClick={() => handleSignOutClick()}>
