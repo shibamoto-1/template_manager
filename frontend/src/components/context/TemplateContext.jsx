@@ -25,7 +25,7 @@ export default function TemplateProvider({ children }) {
     setTemplates(res.data.templates);
     setCategories(res.data.categories);
     selectTemplate(res.data.templates[0]);
-  
+  }
 
   const handleCreateTemplate = async(title, body, category) => {
     await createTemplate(title, body, category);
