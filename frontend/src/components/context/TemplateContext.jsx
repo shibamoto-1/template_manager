@@ -11,6 +11,7 @@ export default function TemplateProvider({ children }) {
   const [ categories, setCategories ] = useState([]);
   const [ selectedTemplate, setSelectedTemplate ] = useState(null);
   const [ selectedCategory, setSelectedCategory ] = useState(null);
+  const [ isLoading, setIsLoading ] = useState(true);
 
   const selectTemplate = (template) => {
     setSelectedTemplate(template);
@@ -25,6 +26,7 @@ export default function TemplateProvider({ children }) {
     setTemplates(res.data.templates);
     setCategories(res.data.categories);
     selectTemplate(res.data.templates[0]);
+    setIsLoading(false);
   }
 
   const handleCreateTemplate = async(title, body, category) => {
@@ -59,7 +61,7 @@ export default function TemplateProvider({ children }) {
   }, [])
 
   return (
-    <TemplateContext.Provider value={{templates, categories, selectedTemplate, selectedCategory }}>
+    <TemplateContext.Provider value={{templates, categories, selectedTemplate, selectedCategory, isLoading }}>
       <TemplateUpdateContext value={{selectTemplate, selectCategory}}>
           <TemplateAPIContext value={{handleCreateTemplate, handleUpdateTemplate, handleDeleteTemplate, handleUpdateCategoryName, handleDeleteCategory}}>
             {children}
