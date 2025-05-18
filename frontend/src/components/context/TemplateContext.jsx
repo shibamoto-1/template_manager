@@ -34,7 +34,9 @@ export default function TemplateProvider({ children }) {
 
   const handleUpdateTemplate = async(body, title, id) => {
     await updateTemplate(body, title, id);
-    fetch();
+
+    setTemplates(prev => prev.map(template => template.id === id ? { ...template, title, body } : template))
+    setSelectedTemplate(prev =>  ({...prev, title, body }));
   }
   
   const handleDeleteTemplate = async(id) => {
