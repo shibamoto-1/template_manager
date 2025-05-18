@@ -35,7 +35,7 @@ export const SignIn = () => {
   return (
     <div className="w-full h-screen">
       <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-md border p-5 mt-20 mx-auto">
-        <legend className="fieldset-legend">Sign In</legend>
+        <legend className="fieldset-legend">ログイン</legend>
 
         {/* モーダルに変更予定 */}
         {isError && <p className="text-red-400 mb-4">メールアドレスまたはパスワードが間違っています。</p>}
@@ -70,7 +70,7 @@ export const SignIn = () => {
           ログイン
         </Button>
 
-        <Link to="/signup">サインアップへ</Link>
+        <Link to="/signup">ユーザー作成へ</Link>
       </fieldset>
     </div>
   );

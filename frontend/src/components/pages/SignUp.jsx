@@ -88,7 +88,7 @@ export const SignUp = () => {
           アカウント作成
         </Button>
 
-        <Link to="/signin">サインインへ</Link>
+        <Link to="/signin">ログインはこちら</Link>
       </fieldset>
     </div>
   );
