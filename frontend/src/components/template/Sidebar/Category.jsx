@@ -2,6 +2,7 @@ import { EllipsisVertical } from 'lucide-react';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { TemplateAPIContext, TemplateContext, TemplateUpdateContext } from '../../context/TemplateContext';
 import DeleteModal from "../../DeleteModal";
+import { useForm } from 'react-hook-form';
 
 
 export default function Category({ templateSum, category = null }) {
@@ -9,54 +10,65 @@ export default function Category({ templateSum, category = null }) {
   const { selectCategory } = useContext(TemplateUpdateContext);
   const { handleUpdateCategoryName, handleDeleteCategory } = useContext(TemplateAPIContext);
   const [ isEditName, setIsEditName ] = useState(false);
-  const [ categoryName, setCategoryName ] = useState(category ? category.name : "全カテゴリ");
-  const modalRef = useRef();
+  const { register, handleSubmit, reset, watch } = useForm({ defaultValues: {name: category ? category.name : "全カテゴリ"}, mode: "onChange" });
+  const categoryName = watch("name");
+  const { ref, ...rest } = register("name");
+  const modalRef = useRef(null);
   const inputRef = useRef(null);
-
-  const handleOpenModal = () => {
-    modalRef.current.showModal();
-  }
-
-  const handleCloseModal = () => {
-    modalRef.current.close();
-  }
-
+  
   const deleteCategory = () => {
     handleDeleteCategory(category.id);
     modalRef.current.close();
   }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    handleUpdateCategoryName(category.id, categoryName);
+  
+  const onSubmit = () => {
+    if(categoryName === ""){
+      reset({name: category.name})
+    } else {
+      handleUpdateCategoryName(category.id, categoryName);
+    }
     setIsEditName(false);
   }
+
   const handleOnBlur = () => {
     setIsEditName(false);
-    setCategoryName(category.name);
-  }
+    reset({name: category.name});  }
   
   useEffect(() =>  {
     if (isEditName) {
-    inputRef.current.focus();
+      inputRef.current.focus();
     }
   }, [isEditName]);
+  
+  const handleOpenModal = () => {
+    modalRef.current.showModal();
+  }
+  const handleCloseModal = () => {
+    modalRef.current.close();
+  }
+
 
   return (
     <li className="flex justify-between items-center pr-2 text-sm">
       {/* カテゴリ名 */}
       <div className="flex space-x-5 w-full">
         {isEditName ? 
-        <form onSubmit={handleSubmit}>
-          <input
-            ref={inputRef}
-            type="text"
-            className="input input-ghost h-8 my-2"
-            value={categoryName}
-            onChange={(e) => setCategoryName(e.target.value)}
-            onBlur={handleOnBlur}
-          />
-        </form>
+        <div>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <input
+              type="text"
+              className="input input-ghost h-8 my-2"
+              {...rest}
+              ref={e => {
+                ref(e),
+                inputRef.current = e
+              }}
+              onBlur={handleOnBlur}
+            />
+          </form>
+          <p className='text-base-content/70 text-xs'>Enterで決定</p>
+        </div>
+
           :
           <button
             type="button"
