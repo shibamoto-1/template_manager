@@ -42,8 +42,8 @@ export function Content() {
   }
   
   const handleUpdate = () => {
-    handleUpdateTemplate(body, title, id);
     setIsUpdated(true);
+    handleUpdateTemplate(body, title, id);
   }
 
   const copy = () => {
@@ -52,8 +52,6 @@ export function Content() {
 
   const handleDelete = (modalRef) => {
     handleDeleteTemplate(id);
-    setTitle("");
-    setBody("");
     modalRef?.current.close();
   }
 
