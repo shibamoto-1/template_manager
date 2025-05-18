@@ -6,16 +6,33 @@ import { TemplateAPIContext, TemplateContext } from "../../context/TemplateConte
 import Button from "../../Button";
 import { Edit } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 
 export function Content() {
   const { selectedTemplate } = useContext(TemplateContext);
   const { handleUpdateTemplate, handleDeleteTemplate } = useContext(TemplateAPIContext);
-  const [ title, setTitle ] = useState("");
-  const [ body, setBody ] = useState("");
   const [ id, setId ] = useState(null)
+  const { 
+    register,
+    reset,
+    watch,
+    formState: { errors },
+  } = useForm({ defaultValues: {title: "", body: "" }, mode: "onBlur" });
+  const [ title, body ] = watch([ "title", "body" ]);
   const [ isUpdated, setIsUpdated ] = useState(false);
 
+  useEffect(() => {
+    if (selectedTemplate) {
+      reset({
+        title: selectedTemplate.title,
+        body: selectedTemplate.body
+      })
+      setId(selectedTemplate.id);
+      setIsUpdated(false);
+    }
+  }, [selectedTemplate.id]);
+  
   const isEditing = () => {
     if (selectedTemplate.title === title && selectedTemplate.body === body){
       return false;
@@ -23,15 +40,7 @@ export function Content() {
       return true;
     };
   }
-  useEffect(() => {
-    if (selectedTemplate) {
-      setTitle(selectedTemplate.title);
-      setBody(selectedTemplate.body);
-      setId(selectedTemplate.id);
-      setIsUpdated(false);
-    }
-  }, [selectedTemplate.id]);
-
+  
   const handleUpdate = () => {
     handleUpdateTemplate(body, title, id);
     setIsUpdated(true);
@@ -52,7 +61,7 @@ export function Content() {
     <div>
       <ContentHeader copy={copy} handleUpdate={handleUpdate} handleDelete={handleDelete} />
       <div className="flex flex-1">
-        <Body title={title} setTitle={setTitle} body={body} setBody={setBody} isEditing={isEditing} isUpdated={isUpdated} />
+        <Body isEditing={isEditing} isUpdated={isUpdated} register={register} errors={errors} />
         <Preview body={body} />
       </div>
     </div>
