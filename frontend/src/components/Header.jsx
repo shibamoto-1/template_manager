@@ -6,7 +6,7 @@ import { signOut } from "../api/auth";
 import Cookies from "js-cookie";
 
 export default function Header() {
-  const { isSignedIn } = useContext(AuthContext);
+  const { isSignedIn, setIsSignedIn } = useContext(AuthContext);
   const isGuest = Cookies.get("_is_guest");
   const navigate = useNavigate();
 
@@ -16,7 +16,8 @@ export default function Header() {
       Cookies.remove("_access_token")
       Cookies.remove("_client")
       Cookies.remove("_uid")
-      navigate("/signin");
+      navigate("/");
+      setTimeout(() => setIsSignedIn(false), 50);
     } catch (error) {
       console.log(error);
     }
@@ -29,7 +30,7 @@ export default function Header() {
       </Link>
 
       {isSignedIn && !isGuest ? (
-        <nav onClick={() => handleSignOutClick()}>
+        <nav className="cursor-pointer" onClick={() => handleSignOutClick()}>
           <span>ログアウト</span>
         </nav>
       ) : (
