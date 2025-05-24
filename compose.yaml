@@ -1,0 +1,25 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile.dev
+    command: bash -c "rails s -b 0.0.0.0"
+    volumes:
+      - ./backend:/backend
+    ports:
+      - 3000:3000
+    tty: true
+    stdin_open: true
+
+  frontend:
+    build: ./frontend
+    command: npm run dev
+    ports:
+      - 5173:5173
+    volumes:
+      - ./frontend:/frontend
+    depends_on:
+      - backend
+    tty: true
+    stdin_open: true
+
