@@ -8,6 +8,11 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  test: {
+    globals: true,
+    environment: "happy-dom",
+    setupFiles: ["./vitest-setup.js"],
+  },
   server: {
     host: true,
     port: 5173,
