@@ -27,4 +27,23 @@ describe(Create, () => {
     );      
     expect(screen.getByText("新規テンプレート作成")).toBeInTheDocument();
   });
+
+  test("タイトル・内容・カテゴリのinputとラベルが表示される", () => {
+    render(
+      <AuthContext.Provider value={mockAuth}>
+      <MemoryRouter>
+      <TemplateContext value={{ categories: mockCategories }}>
+        <TemplateAPIContext value={{ handleCreateTemplate: mockHandleCreateTemplate }}>
+          <Create />
+        </TemplateAPIContext>
+      </TemplateContext>
+      </MemoryRouter>
+      </AuthContext.Provider>
+    );
+    expect(screen.getByLabelText("テンプレート名")).toBeInTheDocument();
+    expect(screen.getByLabelText("テンプレート内容")).toBeInTheDocument();
+    expect(screen.getByLabelText("カテゴリー")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("テンプレート名を入力")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("カテゴリ名を入力")).toBeInTheDocument();
+  });
 });
