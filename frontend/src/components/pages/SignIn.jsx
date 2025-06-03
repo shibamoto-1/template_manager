@@ -11,7 +11,6 @@ export const SignIn = () => {
   const { setIsSignedIn } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  // モーダルに変更予定
   const [isError, setIsError] = useState(false);
 
   const onSubmit = async(data) => {
@@ -37,7 +36,6 @@ export const SignIn = () => {
       <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-md border p-5 mt-20 mx-auto">
         <legend className="fieldset-legend">ログイン</legend>
 
-        {/* モーダルに変更予定 */}
         {isError && <p className="text-red-400 mb-4">メールアドレスまたはパスワードが間違っています。</p>}
 
         <label className="label" htmlFor="email">Email</label>

@@ -23,6 +23,7 @@ export default function TemplateProvider({ children }) {
 
   const fetch = async() => {
     const res = await getTemplates();
+    console.log(res);
     setTemplates(res.data.templates);
     setCategories(res.data.categories);
     selectTemplate(res.data.templates[0]);

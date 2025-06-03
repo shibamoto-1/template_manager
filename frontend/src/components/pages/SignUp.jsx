@@ -12,8 +12,7 @@ export const SignUp = () => {
   const { setIsSignedIn } = useContext(AuthContext);
   const navigate = useNavigate();
 
-    // モーダルに変更予定
-    const [isError, setIsError] = useState(false);
+  const [isError, setIsError] = useState(false);
 
 
   const onSubmit = async (data) => {
