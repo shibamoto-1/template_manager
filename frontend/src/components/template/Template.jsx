@@ -8,10 +8,6 @@ import Loading from '../Loading';
 export default function Template() {
   const { templates, isLoading } = useContext(TemplateContext);
   const isEmpty = templates.length === 0;
-  
-  // if (isLoading) {
-  //   return <Loading />;
-  // }
 
   return (
     <div className='flex flex-col h-screen flex-1'>
