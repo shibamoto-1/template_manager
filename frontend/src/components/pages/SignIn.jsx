@@ -5,6 +5,7 @@ import { signIn } from "../../api/auth";
 import { AuthContext } from "../../App";
 import { useForm } from "react-hook-form";
 import Button from "../Button";
+import GoogleLogin from "../oauth_button/GoogleLogin";
 
 export const SignIn = () => {
   const { register, handleSubmit, formState: { errors } } = useForm({mode: "onChange"});
@@ -67,6 +68,12 @@ export const SignIn = () => {
         <Button type="submit" className="btn-primary mt-4" onClick={handleSubmit(onSubmit)}>
           ログイン
         </Button>
+
+        <div>
+            OR
+        </div>
+
+        <GoogleLogin />
 
         <Link to="/signup">ユーザー作成へ</Link>
       </fieldset>
