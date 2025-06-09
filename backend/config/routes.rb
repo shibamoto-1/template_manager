@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      namespace :auth do
-        resources :sessions, only: %i[index]
-      end
       post 'guest_login', to: 'guest_sessions#create'
     end
   end
