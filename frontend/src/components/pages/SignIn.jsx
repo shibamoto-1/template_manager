@@ -18,9 +18,6 @@ export const SignIn = () => {
     try {
       const res = await signIn(data);
       if (res.status === 200) {
-        Cookies.set("_access_token", res.headers["access-token"]);
-        Cookies.set("_client", res.headers["client"]);
-        Cookies.set("_uid", res.headers["uid"]);
         Cookies.remove("_is_guest");
 
         setIsSignedIn(true);

@@ -63,6 +63,7 @@ DeviseTokenAuth.setup do |config|
   # devise confirmable module. If you want to use devise confirmable module and
   # send email, set it to true. (This is a setting for compatibility)
   config.send_confirmation_email = false
+  config.default_confirm_success_url = "http://localhost:3000"
 
   config.cookie_enabled = true
   config.cookie_name = "_templi_session"

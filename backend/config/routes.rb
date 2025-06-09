@@ -8,9 +8,7 @@ Rails.application.routes.draw do
     end
   end
   
-  mount_devise_token_auth_for 'User', at: 'api/v1/auth',  controllers: {
-    registrations: 'api/v1/auth/registrations'
-  }
+  mount_devise_token_auth_for 'User', at: 'api/v1/auth'
 
   resources :templates, only: [:index, :create, :update, :destroy]
   resources :categories, only: [:update, :destroy]

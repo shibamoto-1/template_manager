@@ -18,9 +18,6 @@ export const SignUp = () => {
   const onSubmit = async (data) => {
     try {
       const res = await signUp(data);
-      Cookies.set("_access_token", res.data.token["accessToken"]);
-      Cookies.set("_client", res.data.token["client"]);
-      Cookies.set("_uid", res.data.token["uid"]);
       Cookies.remove("_is_guest");
 
       setIsSignedIn(true);
