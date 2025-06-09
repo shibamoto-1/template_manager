@@ -20,13 +20,13 @@ class TemplatesController < ApplicationController
   end
 
   def update
-    template = current_api_v1_auth_user.templates.find(params[:id])
+    template = current_user.templates.find(params[:id])
     template.update(template_params)
     head :ok
   end
 
   def destroy
-    template = current_api_v1_auth_user.templates.find(params[:id])
+    template = current_user.templates.find(params[:id])
     if template.nil?
       head :not_found
     else
@@ -37,11 +37,11 @@ class TemplatesController < ApplicationController
 
   private
   def template_params
-    params.require(:template).permit(:title, :body).merge(user_id: current_api_v1_auth_user.id)
+    params.require(:template).permit(:title, :body).merge(user_id: current_user.id)
   end
 
   def category_params
-    params.permit(:name).merge(user_id: current_api_v1_auth_user.id)
+    params.permit(:name).merge(user_id: current_user.id)
   end
 
 end
