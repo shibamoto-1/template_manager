@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :authenticate_api_v1_user!
+  before_action :authenticate_user_with_cookie!
 
   def update
     category = current_api_v1_user.categories.find(params[:id])

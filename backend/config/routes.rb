@@ -9,8 +9,7 @@ Rails.application.routes.draw do
   end
   
   mount_devise_token_auth_for 'User', at: 'api/v1/auth',  controllers: {
-    registrations: 'api/v1/auth/registrations',
-    # omniauth_callbacks: 'api/v1/auth/omniauth_callbacks'
+    registrations: 'api/v1/auth/registrations'
   }
 
   resources :templates, only: [:index, :create, :update, :destroy]

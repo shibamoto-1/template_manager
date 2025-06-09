@@ -65,8 +65,10 @@ DeviseTokenAuth.setup do |config|
   config.send_confirmation_email = false
 
   config.cookie_enabled = true
+  config.cookie_name = "_templi_session"
   config.cookie_attributes = { 
     httponly: true,
-    secure: Rails.env.production?
+    secure: Rails.env.production?,
+    same_site: :lax
   }
 end

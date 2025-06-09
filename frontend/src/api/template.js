@@ -2,7 +2,8 @@ import axios from "axios";
 import Cookies from 'js-cookie';
 
 const templateBaseURL = axios.create({
-    baseURL: `${import.meta.env.VITE_BASE_URL}`
+    baseURL: `${import.meta.env.VITE_BASE_URL}`,
+    withCredentials: true,
   });
 
 export const getTemplates = () => {
