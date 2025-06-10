@@ -1,12 +1,13 @@
-# app/controllers/overrides/omniauth_callbacks_controller.rb
 class Api::V1::Auth::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksController
   protected
 
-  def redirect_to_auth_origin
-    if @auth_origin_url.present?
-      redirect_to(@auth_origin_url, allow_other_host: true)
+  def render_data_or_redirect(message, data, user_data = {})
+    if ['inAppBrowser', 'newWindow'].include?(omniauth_window_type)
+      render_data(message, user_data.merge(data))
+    elsif auth_origin_url
+      redirect_to DeviseTokenAuth::Url.generate(auth_origin_url, data.merge(blank: true).merge(redirect_options)), allow_other_host: true
     else
-      render json: { error: 'Missing auth_origin_url' }, status: :unprocessable_entity
+      fallback_render data[:error] || 'An error occurred'
     end
   end
 end
