@@ -22,8 +22,8 @@ module Backend
 
     config.session_store :cookie_store,
       key: '_templi_session',
-      same_site: :lax,
-      secure: Rails.env.production?,
+      same_site: :none,
+      secure: Rails.env.production? ? :none : :lax,
       httponly: true
     
     # Configuration for the application, engines, and railties goes here.
