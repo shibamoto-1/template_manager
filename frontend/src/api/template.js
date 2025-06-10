@@ -7,13 +7,7 @@ const templateBaseURL = axios.create({
   });
 
 export const getTemplates = () => {
-  return  templateBaseURL.get("/templates", {
-    headers: {
-      "access-token": Cookies.get("_access_token"),
-      client: Cookies.get("_client"),
-      uid: Cookies.get("_uid"),
-    },
-  });
+  return  templateBaseURL.get("/templates");
 };
 
 export const createTemplate = (title, body, category) => {
@@ -22,13 +16,6 @@ export const createTemplate = (title, body, category) => {
     title: title,
     body: body,
     name: category
-  },
-  {
-    headers: {
-      "access-token": Cookies.get("_access_token"),
-      client: Cookies.get("_client"),
-      uid: Cookies.get("_uid"),
-    }
   });
 };
 
@@ -37,48 +24,17 @@ export const updateTemplate = (body, title, id) => {
   {
     title: title,
     body: body
-  },
-  {
-    headers: {
-      "access-token": Cookies.get("_access_token"),
-      client: Cookies.get("_client"),
-      uid: Cookies.get("_uid"),
-    }
   });
 };
 
 export const deleteTemplate = (id) => {
-  return templateBaseURL.delete(`/templates/${id}`,
-  {
-    headers: {
-      "access-token": Cookies.get("_access_token"),
-      client: Cookies.get("_client"),
-      uid: Cookies.get("_uid"),
-    }
-  });
+  return templateBaseURL.delete(`/templates/${id}`);
 };
 
 export const updateCategoryName = (id, name) => {
-  return templateBaseURL.patch(`/categories/${id}`,
-  {
-    name: name
-  },
-  {
-    headers: {
-      "access-token": Cookies.get("_access_token"),
-      client: Cookies.get("_client"),
-      uid: Cookies.get("_uid"),
-    }
-  })
+  return templateBaseURL.patch(`/categories/${id}`,{name: name})
 }
 
 export const deleteCategory = (id) => {
-  return templateBaseURL.delete(`/categories/${id}`,
-  {
-    headers: {
-      "access-token": Cookies.get("_access_token"),
-      client: Cookies.get("_client"),
-      uid: Cookies.get("_uid"),
-    }
-  });
+  return templateBaseURL.delete(`/categories/${id}`);
 }

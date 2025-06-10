@@ -1,9 +1,17 @@
 class Api::V1::GuestSessionsController < ApplicationController
   def create
+    guest_email = "guest_#{SecureRandom.hex(4)}@example.com"
+
     @resource = User.create!(
-      email: "guest_#{SecureRandom.hex(4)}@example.com",
+      email: guest_email,
       password: SecureRandom.hex(10),
+      uid: guest_email,
+      provider: "email"
     )
+
+    @token = @resource.create_token
+    auth_header = @resource.build_auth_headers(@token.token, @token.client)
+    set_cookie(auth_header)
 
     category_1 = @resource.categories.create!(name: "サンプル")
     category_2 = @resource.categories.create!(name: "AA")
@@ -24,6 +32,9 @@ class Api::V1::GuestSessionsController < ApplicationController
       category: category_2
     )
 
-    render json: { token: @resource.create_new_auth_token}
+    # update_auth_headerによってログインが出来ている？
+    @resource.create_new_auth_token
+
+    head :ok
   end
 end

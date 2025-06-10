@@ -36,10 +36,7 @@ export default function Home() {
 
   const handleGuestLogin = async(e) => {
     e.preventDefault();
-    const res = await guestLogin();
-    Cookies.set("_access_token", res.data.token["accessToken"]);
-    Cookies.set("_client", res.data.token["client"]);
-    Cookies.set("_uid", res.data.token["uid"]);
+    await guestLogin();
     Cookies.set("_is_guest", "true");
 
     setIsSignedIn(true);

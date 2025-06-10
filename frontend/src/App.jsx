@@ -5,6 +5,7 @@ import Home from './components/pages/Home';
 import { SignUp } from './components/pages/SignUp';
 import { SignIn } from './components/pages/SignIn';
 import Create from './components/template/Create';
+import Cookies from "js-cookie";
 
 import './App.css'
 import TemplateProvider from './components/context/TemplateContext';

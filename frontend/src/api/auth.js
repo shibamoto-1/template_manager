@@ -1,7 +1,6 @@
 import client from "./client";
 
 export const signUp = (user_data) => {
-  console.log(user_data);
   return client.post("/auth", user_data);
 };
 
