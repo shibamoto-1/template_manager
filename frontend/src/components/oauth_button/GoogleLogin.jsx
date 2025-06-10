@@ -1,6 +1,6 @@
 export default function GoogleLogin() {
   const baseUrl = import.meta.env.VITE_BASE_URL;
-  const originUrl = encodeURIComponent(`${import.meta.env.TEMPLATE_URL}`); 
+  const originUrl = encodeURIComponent(`${import.meta.env.VITE_TEMPLATE_URL}`); 
   
   return (
     <a
