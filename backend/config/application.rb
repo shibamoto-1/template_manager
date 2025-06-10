@@ -19,8 +19,13 @@ module Backend
     config.middleware.use ActionDispatch::Cookies
 
     config.middleware.use ActionDispatch::Session::CookieStore
-    config.session_store :cookie_store, key: '_backend_session'
 
+    config.session_store :cookie_store,
+      key: '_templi_session',
+      same_site: :lax,
+      secure: Rails.env.production?,
+      httponly: true
+    
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

@@ -1,10 +1,11 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { createContext, useState, useEffect } from 'react';
-import { getCurrentUser } from "./api/auth";
+import { validateUser } from "./api/auth";
 import Home from './components/pages/Home';
 import { SignUp } from './components/pages/SignUp';
 import { SignIn } from './components/pages/SignIn';
 import Create from './components/template/Create';
+import Cookies from "js-cookie";
 
 import './App.css'
 import TemplateProvider from './components/context/TemplateContext';
@@ -16,23 +17,23 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [isSignedIn, setIsSignedIn] = useState(false);
 
-  const handleGetCurrentUser = async () => {
+  const handleValidateUser = async () => {
     try {
-      const res = await getCurrentUser();
-
-      if (res.status === 200) {
+      const res = await validateUser();
+      if (res.data.success) {
         setIsSignedIn(true);
       } else {
-        console.log("no current user");
+        console.log("no user");
       }
     } catch (e) {
       console.log(e);
     }
+    
     setLoading(false);
   };
 
   useEffect(() => {
-    handleGetCurrentUser();
+    handleValidateUser();
   }, []);
 
   const Private = ({ children }) => {
