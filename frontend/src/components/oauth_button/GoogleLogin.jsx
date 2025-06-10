@@ -1,6 +1,6 @@
 export default function GoogleLogin() {
   const baseUrl = import.meta.env.VITE_BASE_URL;
-  const originUrl = encodeURIComponent("http://localhost:5173/template"); 
+  const originUrl = encodeURIComponent(`${import.meta.env.TEMPLATE_URL}`); 
   
   return (
     <a
@@ -11,3 +11,4 @@ export default function GoogleLogin() {
     </a>
   );
 }
+
