@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signUp } from "../../api/auth";
 import Cookies from "js-cookie";
@@ -9,11 +9,15 @@ import GoogleLogin from "../oauth_button/GoogleLogin";
 
 
 export const SignUp = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm({mode: "onChange"});
+  const { register, handleSubmit, watch, trigger, formState: { errors } } = useForm({mode: "onChange"});
   const { setIsSignedIn } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [isError, setIsError] = useState(false);
+  const password = watch("password");
+  useEffect(() => {
+    trigger("passwordConfirmation");
+  }, [password]);
 
 
   const onSubmit = async (data) => {
@@ -85,6 +89,7 @@ export const SignUp = () => {
           {...register("passwordConfirmation", {
             required: "確認用パスワードは必須です。", 
             minLength: {value: 6, message: "パスワードは6文字以上で入力してください。"},
+            validate: (value) => value === password || "パスワードが一致しません。"
           })}
         />
         <p className="text-red-400">{errors?.passwordConfirmation?.message}</p>
