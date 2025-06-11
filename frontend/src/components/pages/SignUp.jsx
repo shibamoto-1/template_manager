@@ -16,8 +16,11 @@ export const SignUp = () => {
   const [ errorMessage, setErrorMessage ] = useState("");
 
   const password = watch("password");
+  const passwordConfirmation = watch("passwordConfirmation");
   useEffect(() => {
-    trigger("passwordConfirmation");
+    if(passwordConfirmation){
+      trigger("passwordConfirmation")
+    }
   }, [password]);
 
 
