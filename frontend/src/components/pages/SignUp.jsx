@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 import { AuthContext } from "../../App";
 import { useForm } from "react-hook-form";
 import Button from "../Button";
+import GoogleLogin from "../oauth_button/GoogleLogin";
 
 
 export const SignUp = () => {
@@ -30,19 +31,29 @@ export const SignUp = () => {
 
   return (
     <div className="w-full h-screen">
-      <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-md border p-5 mt-20 mx-auto">
-        <legend className="fieldset-legend">ユーザー作成</legend>
+      <div className="mt-10 text-center">
+        <h2 className="text-xl font-semibold">アカウント作成</h2>
+      </div>
+
+      <fieldset className="fieldset bg-white rounded-box w-sm shadow p-6 mt-10 mx-auto">
+        <div className="my-5 flex-col">
+          <GoogleLogin />
+        </div>
+
+        <div class="w-full">
+          <div class="divider">または</div>
+        </div>
 
         {/* モーダルに変更予定 */}
         {isError && <p className="text-red-400 mb-4">入力が間違っています。</p>}
 
 
-        <label className="label" htmlFor="email">Email</label>
+        <label className="label" htmlFor="email">メールアドレス</label>
         <input
           type="email"
           id="email"
-          placeholder="Email"
-          className="input"
+          placeholder="email@example.com"
+          className="input w-sm mb-1"
           {...register("email", {
             required: "メールアドレスは必須です。",
             pattern: {value: /^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/, message: "メールアドレスの形式が違います。"},
@@ -51,13 +62,12 @@ export const SignUp = () => {
         <p className="text-red-400">{errors?.email?.message}</p>
 
 
-        <label className="label" htmlFor="password">Password</label>
+        <label className="label" htmlFor="password">パスワード</label>
         <input
           type="password"
           id="password"
           name="password"
-          placeholder="Password"
-          className="input"
+          className="input w-sm mb-1"
           {...register("password", {
             required: "パスワードは必須です。", 
             minLength: {value: 6, message: "パスワードは6文字以上で入力してください。"},
@@ -66,13 +76,12 @@ export const SignUp = () => {
         <p className="text-red-400">{errors?.password?.message}</p>
 
         
-        <label className="label" htmlFor="password_confirmation">Password confirm</label>
+        <label className="label" htmlFor="password_confirmation">パスワード確認</label>
         <input
           type="password"
           id="password_confirmation"
           name="password_confirmation"
-          placeholder="Password confirm"
-          className="input"
+          className="input w-sm mb-2"
           {...register("passwordConfirmation", {
             required: "確認用パスワードは必須です。", 
             minLength: {value: 6, message: "パスワードは6文字以上で入力してください。"},
@@ -84,7 +93,11 @@ export const SignUp = () => {
           アカウント作成
         </Button>
 
-        <Link to="/signin">ログインはこちら</Link>
+        <p className="text-center mt-5">
+          すでにアカウントをお持ちの方は<span className="text-blue-600"><Link to="/signin">こちら</Link></span>
+        </p>
+        
+        <Link to="/" className="mt-3 text-blue-600">ホームページに戻る</Link>
       </fieldset>
     </div>
   );

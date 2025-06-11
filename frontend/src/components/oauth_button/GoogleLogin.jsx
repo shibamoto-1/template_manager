@@ -5,9 +5,9 @@ export default function GoogleLogin() {
   return (
     <a
       href={`${baseUrl}/api/v1/auth/google_oauth2?auth_origin_url=${originUrl}`}
-      className="btn btn-primary"
+      className="btn btn-outline btn-primary w-full"
     >
-      Googleログイン
+      Googleで続ける
     </a>
   );
 }
