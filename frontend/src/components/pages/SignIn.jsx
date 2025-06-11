@@ -50,7 +50,6 @@ export const SignIn = () => {
         <input
             type="email"
             id="email"
-            placeholder="Email"
             className="input w-sm mb-1"
             {...register("email", {
               required: "メールアドレスは必須です。",
@@ -63,7 +62,6 @@ export const SignIn = () => {
         <input
             type="password"
             id="password"
-            placeholder="Password"
             className="input w-sm mb-1"
             {...register("password", {
               required: "パスワードは必須です。", 
@@ -77,10 +75,12 @@ export const SignIn = () => {
         </Button>
 
         <p className="text-center mt-5">
-          すでにアカウントをお持ちの方は<span className="text-blue-600"><Link to="/signup">こちら</Link></span>
+          新規登録は<span className="text-blue-600"><Link to="/signup">こちら</Link></span>
         </p>
 
-        <Link to="/" className="mt-3 text-blue-600">ホームページに戻る</Link>
+        <div className="mt-3">
+          <Link to="/" className="text-blue-600">ホームページに戻る</Link>
+        </div>
       </fieldset>
     </div>
   );

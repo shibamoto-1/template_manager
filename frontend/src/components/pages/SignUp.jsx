@@ -97,7 +97,9 @@ export const SignUp = () => {
           すでにアカウントをお持ちの方は<span className="text-blue-600"><Link to="/signin">こちら</Link></span>
         </p>
         
-        <Link to="/" className="mt-3 text-blue-600">ホームページに戻る</Link>
+        <div className="mt-3">
+          <Link to="/" className="text-blue-600">ホームページに戻る</Link>
+        </div>
       </fieldset>
     </div>
   );
