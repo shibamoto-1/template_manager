@@ -13,7 +13,8 @@ export const SignUp = () => {
   const { setIsSignedIn } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const [isError, setIsError] = useState(false);
+  const [ errorMessage, setErrorMessage ] = useState("");
+
   const password = watch("password");
   useEffect(() => {
     trigger("passwordConfirmation");
@@ -22,14 +23,18 @@ export const SignUp = () => {
 
   const onSubmit = async (data) => {
     try {
-      const res = await signUp(data);
-      Cookies.remove("_is_guest");
+      await signUp(data);
 
+      Cookies.remove("_is_guest");
       setIsSignedIn(true);
       navigate("/template");
     } catch (e) {
+      if(e.status === 422) {
+        setErrorMessage("既にユーザーが存在しています");
+      } else {
+        setErrorMessage("ユーザー作成に失敗しました。")
+      }
       console.log("Error response:", e); 
-      setIsError(true);
     }
   };
 
@@ -44,12 +49,12 @@ export const SignUp = () => {
           <GoogleLogin />
         </div>
 
-        <div class="w-full">
-          <div class="divider">または</div>
+        <div className="w-full">
+          <div className="divider">または</div>
         </div>
 
         {/* モーダルに変更予定 */}
-        {isError && <p className="text-red-400 mb-4">入力が間違っています。</p>}
+        {errorMessage && <p className="text-red-400 mb-4">{errorMessage}</p>}
 
 
         <label className="label" htmlFor="email">メールアドレス</label>
