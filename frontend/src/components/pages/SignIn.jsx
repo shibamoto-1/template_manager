@@ -31,17 +31,26 @@ export const SignIn = () => {
 
   return (
     <div className="w-full h-screen">
-      <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-md border p-5 mt-20 mx-auto">
-        <legend className="fieldset-legend">ログイン</legend>
+      <div className="mt-10 text-center">
+        <h2 className="text-xl font-semibold">ログイン</h2>
+      </div>
+
+      <fieldset className="fieldset rounded-box w-sm p-6 mt-10 shadow mx-auto">
+        <div className="my-5 flex-col">
+          <GoogleLogin />
+        </div>
+
+        <div class="w-full">
+          <div class="divider">または</div>
+        </div>
 
         {isError && <p className="text-red-400 mb-4">メールアドレスまたはパスワードが間違っています。</p>}
 
-        <label className="label" htmlFor="email">Email</label>
+        <label className="label" htmlFor="email">メールアドレス</label>
         <input
             type="email"
             id="email"
-            placeholder="Email"
-            className="input"
+            className="input w-sm mb-1"
             {...register("email", {
               required: "メールアドレスは必須です。",
               pattern: {value: /^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/, message: "メールアドレスの形式が違います。"},
@@ -49,12 +58,11 @@ export const SignIn = () => {
           />
           <p className="text-red-400">{errors?.email?.message}</p>
 
-        <label className="label" htmlFor="password">Password</label>
+        <label className="label" htmlFor="password">パスワード</label>
         <input
             type="password"
             id="password"
-            placeholder="Password"
-            className="input"
+            className="input w-sm mb-1"
             {...register("password", {
               required: "パスワードは必須です。", 
               minLength: {value: 6, message: "パスワードは6文字以上で入力してください。"},
@@ -66,13 +74,13 @@ export const SignIn = () => {
           ログイン
         </Button>
 
-        <div>
-            OR
+        <p className="text-center mt-5">
+          新規登録は<span className="text-blue-600"><Link to="/signup">こちら</Link></span>
+        </p>
+
+        <div className="mt-3">
+          <Link to="/" className="text-blue-600">ホームページに戻る</Link>
         </div>
-
-        <GoogleLogin />
-
-        <Link to="/signup">ユーザー作成へ</Link>
       </fieldset>
     </div>
   );

@@ -84,7 +84,7 @@ export default function Category({ templateSum, category = null }) {
       {/* 3点リーダー */}
       {category && 
         <div className="dropdown dropdown-right dropdown-center">
-          <EllipsisVertical tabIndex={0} className="p-1 mr-1 hover:text-red-500" strokeWidth={2}/>
+          <EllipsisVertical tabIndex={0} className="p-1 mr-1 hover:text-red-500 cursor-pointer" strokeWidth={2}/>
           <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm" >
             <li>
               <p onClick={() => setIsEditName(true)} >カテゴリ名を編集</p>
