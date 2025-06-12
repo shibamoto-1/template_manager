@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
-import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { signIn } from "../../api/auth";
 import { AuthContext } from "../../App";
 import { useForm } from "react-hook-form";
@@ -12,22 +12,35 @@ export const SignIn = () => {
   const { setIsSignedIn } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const [isError, setIsError] = useState(false);
+  const [ searchParams, setSearchParams ] = useSearchParams();
+  const [ errorMessage, setErrorMessage ] = useState(false);
 
   const onSubmit = async(data) => {
     try {
-      const res = await signIn(data);
-      if (res.status === 200) {
-        Cookies.remove("_is_guest");
+      await signIn(data);
+      Cookies.remove("_is_guest");
 
-        setIsSignedIn(true);
-        navigate("/template");
-      }
-    } catch (e) {
-      console.log(e);
-      setIsError(true);
+      setIsSignedIn(true);
+      navigate("/template");
+      } catch (e) {
+      console.log("Error response:", e); 
     }
   }
+
+  useEffect(() => {
+    const error = searchParams.get("error");
+    
+    if(!error) return;
+    
+    if(error === "422") {
+      setErrorMessage("既にユーザーが存在しています。別の方法でお試しください。");
+    } else {
+      setErrorMessage("メールアドレスまたはパスワードが間違っています。");
+    }
+  
+    searchParams.delete("error");
+    setSearchParams(searchParams);
+    }, []);
 
   return (
     <div className="w-full h-screen">
@@ -44,7 +57,7 @@ export const SignIn = () => {
           <div class="divider">または</div>
         </div>
 
-        {isError && <p className="text-red-400 mb-4">メールアドレスまたはパスワードが間違っています。</p>}
+        {errorMessage && <p className="text-red-400 mb-4">{errorMessage}</p>}
 
         <label className="label" htmlFor="email">メールアドレス</label>
         <input

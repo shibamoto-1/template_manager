@@ -33,7 +33,7 @@ export const SignUp = () => {
       navigate("/template");
     } catch (e) {
       if(e.status === 422) {
-        setErrorMessage("既にユーザーが存在しています");
+        setErrorMessage("既にユーザーが存在しています。別の方法でお試しください。");
       } else {
         setErrorMessage("ユーザー作成に失敗しました。")
       }
