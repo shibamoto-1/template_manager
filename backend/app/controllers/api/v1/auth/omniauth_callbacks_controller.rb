@@ -44,7 +44,7 @@ class Api::V1::Auth::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCall
     user = User.where(email: auth_hash['info']['email'])
                .where.not(provider: auth_hash['provider'])
     
-    redirect_to "http://localhost:5173/signin?error=422", allow_other_host: true if user.present?
+    redirect_to "#{ENV['FRONTEND_URL']}/signin?error=422", allow_other_host: true if user.present?
   end
 
 end
