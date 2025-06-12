@@ -99,6 +99,10 @@ GEM
       bcrypt (~> 3.0)
       devise (> 3.5.2, < 5)
       rails (>= 4.2.0, < 8.1)
+    dotenv (3.1.8)
+    dotenv-rails (3.1.8)
+      dotenv (= 3.1.8)
+      railties (>= 6.1)
     drb (2.2.1)
     erubi (1.13.1)
     faraday (2.13.1)
@@ -335,6 +339,7 @@ DEPENDENCIES
   debug
   devise
   devise_token_auth
+  dotenv-rails
   omniauth-google-oauth2
   omniauth-rails_csrf_protection
   pg
