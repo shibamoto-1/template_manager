@@ -41,7 +41,8 @@ class Api::V1::Auth::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCall
   end
 
   def validate_email_uniqueness
-    user = User.find_by(email: auth_hash['info']['email'])
+    user = User.where(email: auth_hash['info']['email'])
+               .where.not(provider: auth_hash['provider'])
     
     redirect_to "http://localhost:5173/signin?error=422", allow_other_host: true if user.present?
   end

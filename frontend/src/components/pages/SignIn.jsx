@@ -22,7 +22,8 @@ export const SignIn = () => {
 
       setIsSignedIn(true);
       navigate("/template");
-      } catch (e) {
+    } catch (e) {
+      setErrorMessage("メールアドレスまたはパスワードが間違っています。");
       console.log("Error response:", e); 
     }
   }
@@ -34,8 +35,6 @@ export const SignIn = () => {
     
     if(error === "422") {
       setErrorMessage("既にユーザーが存在しています。別の方法でお試しください。");
-    } else {
-      setErrorMessage("メールアドレスまたはパスワードが間違っています。");
     }
   
     searchParams.delete("error");
@@ -48,53 +47,55 @@ export const SignIn = () => {
         <h2 className="text-xl font-semibold">ログイン</h2>
       </div>
 
-      <fieldset className="fieldset rounded-box w-sm p-6 mt-10 shadow mx-auto">
-        <div className="my-5 flex-col">
-          <GoogleLogin />
-        </div>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <fieldset className="fieldset rounded-box w-sm p-6 mt-10 shadow mx-auto">
+          <div className="my-5 flex-col">
+            <GoogleLogin />
+          </div>
 
-        <div class="w-full">
-          <div class="divider">または</div>
-        </div>
+          <div className="w-full">
+            <div className="divider">または</div>
+          </div>
 
-        {errorMessage && <p className="text-red-400 mb-4">{errorMessage}</p>}
+          {errorMessage && <p className="text-red-400 mb-4">{errorMessage}</p>}
 
-        <label className="label" htmlFor="email">メールアドレス</label>
-        <input
-            type="email"
-            id="email"
-            className="input w-sm mb-1"
-            {...register("email", {
-              required: "メールアドレスは必須です。",
-              pattern: {value: /^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/, message: "メールアドレスの形式が違います。"},
-            })}
-          />
-          <p className="text-red-400">{errors?.email?.message}</p>
+          <label className="label" htmlFor="email">メールアドレス</label>
+          <input
+              type="email"
+              id="email"
+              className="input w-sm mb-1"
+              {...register("email", {
+                required: "メールアドレスは必須です。",
+                pattern: {value: /^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/, message: "メールアドレスの形式が違います。"},
+              })}
+            />
+            <p className="text-red-400">{errors?.email?.message}</p>
 
-        <label className="label" htmlFor="password">パスワード</label>
-        <input
-            type="password"
-            id="password"
-            className="input w-sm mb-1"
-            {...register("password", {
-              required: "パスワードは必須です。", 
-              minLength: {value: 6, message: "パスワードは6文字以上で入力してください。"},
-            })}
-          />
-          <p className="text-red-400">{errors?.password?.message}</p>
+          <label className="label" htmlFor="password">パスワード</label>
+          <input
+              type="password"
+              id="password"
+              className="input w-sm mb-1"
+              {...register("password", {
+                required: "パスワードは必須です。", 
+                minLength: {value: 6, message: "パスワードは6文字以上で入力してください。"},
+              })}
+            />
+            <p className="text-red-400">{errors?.password?.message}</p>
 
-        <Button type="submit" className="btn-primary mt-4" onClick={handleSubmit(onSubmit)}>
-          ログイン
-        </Button>
+          <Button type="submit" className="btn-primary mt-4">
+            ログイン
+          </Button>
 
-        <p className="text-center mt-5">
-          新規登録は<span className="text-blue-600"><Link to="/signup">こちら</Link></span>
-        </p>
+          <p className="text-center mt-5">
+            新規登録は<span className="text-blue-600"><Link to="/signup">こちら</Link></span>
+          </p>
 
-        <div className="mt-3">
-          <Link to="/" className="text-blue-600">ホームページに戻る</Link>
-        </div>
-      </fieldset>
+          <div className="mt-3">
+            <Link to="/" className="text-blue-600">ホームページに戻る</Link>
+          </div>
+        </fieldset>
+      </form>
     </div>
   );
 };
