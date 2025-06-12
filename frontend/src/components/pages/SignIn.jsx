@@ -22,7 +22,8 @@ export const SignIn = () => {
 
       setIsSignedIn(true);
       navigate("/template");
-      } catch (e) {
+    } catch (e) {
+      setErrorMessage("メールアドレスまたはパスワードが間違っています。");
       console.log("Error response:", e); 
     }
   }
@@ -34,8 +35,6 @@ export const SignIn = () => {
     
     if(error === "422") {
       setErrorMessage("既にユーザーが存在しています。別の方法でお試しください。");
-    } else {
-      setErrorMessage("メールアドレスまたはパスワードが間違っています。");
     }
   
     searchParams.delete("error");
@@ -55,7 +54,7 @@ export const SignIn = () => {
           </div>
 
           <div className="w-full">
-            <div classNam="divider">または</div>
+            <div className="divider">または</div>
           </div>
 
           {errorMessage && <p className="text-red-400 mb-4">{errorMessage}</p>}
