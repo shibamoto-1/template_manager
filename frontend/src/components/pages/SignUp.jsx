@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signUp } from "../../api/auth";
 import Cookies from "js-cookie";
@@ -9,23 +9,35 @@ import GoogleLogin from "../oauth_button/GoogleLogin";
 
 
 export const SignUp = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm({mode: "onChange"});
+  const { register, handleSubmit, watch, trigger, formState: { errors } } = useForm({mode: "onChange"});
   const { setIsSignedIn } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const [isError, setIsError] = useState(false);
+  const [ errorMessage, setErrorMessage ] = useState("");
+
+  const password = watch("password");
+  const passwordConfirmation = watch("passwordConfirmation");
+  useEffect(() => {
+    if(passwordConfirmation){
+      trigger("passwordConfirmation")
+    }
+  }, [password]);
 
 
   const onSubmit = async (data) => {
     try {
-      const res = await signUp(data);
-      Cookies.remove("_is_guest");
+      await signUp(data);
 
+      Cookies.remove("_is_guest");
       setIsSignedIn(true);
       navigate("/template");
     } catch (e) {
+      if(e.status === 422) {
+        setErrorMessage("既にユーザーが存在しています。別の方法でお試しください。");
+      } else {
+        setErrorMessage("ユーザー作成に失敗しました。")
+      }
       console.log("Error response:", e); 
-      setIsError(true);
     }
   };
 
@@ -40,12 +52,12 @@ export const SignUp = () => {
           <GoogleLogin />
         </div>
 
-        <div class="w-full">
-          <div class="divider">または</div>
+        <div className="w-full">
+          <div className="divider">または</div>
         </div>
 
         {/* モーダルに変更予定 */}
-        {isError && <p className="text-red-400 mb-4">入力が間違っています。</p>}
+        {errorMessage && <p className="text-red-400 mb-4">{errorMessage}</p>}
 
 
         <label className="label" htmlFor="email">メールアドレス</label>
@@ -85,6 +97,7 @@ export const SignUp = () => {
           {...register("passwordConfirmation", {
             required: "確認用パスワードは必須です。", 
             minLength: {value: 6, message: "パスワードは6文字以上で入力してください。"},
+            validate: (value) => value === password || "パスワードが一致しません。"
           })}
         />
         <p className="text-red-400">{errors?.passwordConfirmation?.message}</p>
