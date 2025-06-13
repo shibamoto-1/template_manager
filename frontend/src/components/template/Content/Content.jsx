@@ -56,9 +56,9 @@ export function Content() {
   }
 
   return(
-    <div>
+    <div className="flex flex-col h-full">
       <ContentHeader copy={copy} handleUpdate={handleUpdate} handleDelete={handleDelete} />
-      <div className="flex flex-1">
+      <div className="flex h-full">
         <Body isEditing={isEditing} isUpdated={isUpdated} register={register} errors={errors} />
         <Preview body={body} />
       </div>
@@ -67,6 +67,7 @@ export function Content() {
 
 }
 
+// テンプレートが空の場合
 export function NoContent() {
   return(
     <div className="h-full flex flex-col justify-top items-center pt-20 gap-10">
