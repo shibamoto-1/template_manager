@@ -10,14 +10,14 @@ export default function Template() {
   const isEmpty = templates.length === 0;
 
   return (
-    <div className='flex flex-col h-screen flex-1'>
+    <div className="flex flex-col h-screen">
       <Header />
       {isLoading ?
         <Loading />
         :
-        <div className="flex flex-1">
+        <div className="flex border-b border-gray-200 h-full">
           <Sidebar />
-          <div className="flex-1" >
+          <div className="size-full" >
             {isEmpty ? <NoContent /> : <Content /> }
           </div>
         </div>

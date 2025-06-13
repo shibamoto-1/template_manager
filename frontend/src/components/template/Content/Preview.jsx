@@ -7,7 +7,7 @@ export default function Preview({body}) {
   const [ isMarkdown, setIsMarkdown ] = useState(true);
 
   return(
-    <div className="flex-1 p-4">
+    <div className="w-1/2 p-4 flex flex-col h-full min-h-full max-h-full">
       <div className="flex justify-between">
         <div>
           <h3 className="text-lg font-medium mb-1">プレビュー</h3>
@@ -25,8 +25,8 @@ export default function Preview({body}) {
         </div>
       </div>
       
-      <div className="w-full h-full border border-gray-300 rounded px-5 pt-2 pb-20">
-        <div className="prose prose-sm">
+      <div className="border border-gray-300 rounded px-5 pt-2 h-full overflow-scroll">
+        <div className="prose prose-sm overflow-scroll">
           {isMarkdown ? 
             <Markdown
               remarkPlugins={[remarkBreaks, remarkGfm]}>

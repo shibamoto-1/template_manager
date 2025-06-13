@@ -9,27 +9,27 @@ export default function Body({isEditing, isUpdated, register, errors}) {
   }
 
   return(
-    <div className="flex-1 p-4 h-screen border-r border-gray-200"> 
-    <div className="flex">
-      <div className="w-1/2 mb-5">
-        <input
-          type="text"
-          className="input input-ghost w-full border-gray-200"
-          placeholder="テンプレートのタイトル"
-          {...register("title", {
-            required: "タイトルは必須です"
-          })}
-        />
-        <p className="text-sm text-red-500">{errors?.title?.message}</p>
-      </div>     
-      <div className="w-full content-end">
-        {statusMessage()}
+    <div className="w-1/2 p-4 min-h-full flex flex-col border-r border-gray-200"> 
+      <div className="flex">
+        <div className="w-1/2 mb-5">
+          <input
+            type="text"
+            className="input input-ghost w-full border-gray-200"
+            placeholder="テンプレートのタイトル"
+            {...register("title", {
+              required: "タイトルは必須です"
+            })}
+          />
+          <p className="text-sm text-red-500">{errors?.title?.message}</p>
+        </div>     
+        <div className="w-full content-end">
+          {statusMessage()}
+        </div>
       </div>
-    </div>
       
-      <div className="w-full h-full pb-20">
+      <div className="size-full">
         <textarea
-          className="textarea size-full"
+          className="p-5 textarea size-full resize-none"
           placeholder="テンプレートの内容を入力してください..."
           {...register("body")}
         />
