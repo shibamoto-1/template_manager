@@ -5,11 +5,13 @@ import Home from './components/pages/Home';
 import { SignUp } from './components/pages/SignUp';
 import { SignIn } from './components/pages/SignIn';
 import Create from './components/template/Create';
-import Cookies from "js-cookie";
 
 import './App.css'
 import TemplateProvider from './components/context/TemplateContext';
 import Template from './components/template/Template';
+import Terms from './components/pages/Terms';
+import Privacy from './components/pages/Privacy';
+import Footer from './components/Footer';
 
 export const AuthContext = createContext();
 
@@ -63,6 +65,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/privacy" element={<Privacy />} />
             <Route
               path="/template"
               element={
@@ -84,6 +88,7 @@ function App() {
               }
             />
           </Routes>
+          <Footer />
         </BrowserRouter>
     </AuthContext.Provider>
   )
