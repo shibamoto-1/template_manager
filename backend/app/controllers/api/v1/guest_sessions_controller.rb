@@ -6,7 +6,7 @@ class Api::V1::GuestSessionsController < ApplicationController
       email: guest_email,
       password: SecureRandom.hex(10),
       uid: guest_email,
-      provider: "email"
+      provider: "guest"
     )
 
     @token = @resource.create_token

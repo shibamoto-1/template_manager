@@ -5,6 +5,6 @@ class User < ApplicationRecord
   
   include DeviseTokenAuth::Concerns::User
 
-  has_many :templates
-  has_many :categories
+  has_many :templates, dependent: :destroy
+  has_many :categories, dependent: :destroy
 end
